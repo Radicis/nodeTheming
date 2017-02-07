@@ -1,0 +1,43 @@
+<div class="full-screen" style="background: url({{background}}) no-repeat center center fixed;">
+
+</div>
+
+<div class="homepage-main">
+    <div>
+        <div class="col-70">
+            <h1>{{truncate artwork.title 40}}</h1>
+            <ul>
+                <li><strong>Artist: </strong> {{artwork.all_artists}}</li>
+                <li><strong>Medium: </strong>{{artwork.medium}}</li>
+                <li><strong>Dimensions: </strong> {{artwork.dimensions}}</li>
+                <li><strong>Date: </strong>{{artwork.dateText}}</li>
+                <li><strong>Url: </strong><a href="{{artwork.url}}" target="_blank">{{truncate artwork.url 50}}</a></li>
+            </ul>
+        </div>
+        <div class="col-30">
+            {{#if artwork.thumbnail}}
+                <img src="{{artwork.thumbnailUrl}}" alt="{{artwork.title}}" />
+            {{else}}
+                <img src="/img/no_image.gif" alt="NO image" />
+            {{/if}}
+        </div>
+        <div class="col-100 credit-line clearfix">
+            <p><em>{{artwork.creditLine}}</em></p>
+        </div>
+        <div class="col-100 clearfix">
+            <div class="left">
+                <a href="/prev/{{artwork._id}}">Previous</a>
+            </div>
+            <div class="right">
+                <a href="/next/{{artwork._id}}">Next</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
