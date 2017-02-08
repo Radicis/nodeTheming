@@ -7,7 +7,7 @@
         <div class="col-70">
             <h1 class="vibrant">{{truncate artwork.title 40}}</h1>
             <ul class="darkMuted">
-                <li><strong>Artist: </strong> {{#each artwork.contributors}}<a href="/artist/{{this.id}}">{{this.fc}}</a>{{/each}}</li>
+                <li><strong>Artist: </strong> {{#each artwork.contributors}}<a class="vibrant" href="/artist/{{this.id}}">{{this.fc}}</a>{{/each}}</li>
                 <li><strong>Medium: </strong>{{artwork.medium}}</li>
                 <li><strong>Dimensions: </strong> {{artwork.dimensions}}</li>
                 <li><strong>Date: </strong>{{artwork.dateText}}</li>

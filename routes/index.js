@@ -48,42 +48,71 @@ router.get('/', function(req, res) {
 
         var vibrant, lightMuted, darkMuted;
 
-        Vibrant.from(randomArtwork.thumbnailUrl).getPalette(function(err, swatches) {
-            if (err) throw err;
-            for (var key in swatches) {
-                var swatch = swatches[key];
-                if (swatch) {
-                    var hex = swatch.getHex();
-                    imageColours.push({hex:hex, key:key});
-                }
-            }
+        try {
 
-            for(var i=0;i<imageColours.length;i++){
-                if(imageColours[i].key === 'Vibrant') {
-                    //var color = Color(imageColours[i].rgb);
-                    vibrant = imageColours[i].hex;
+            Vibrant.from(randomArtwork.thumbnailUrl).getPalette(function (err, swatches) {
+                if (err) throw err;
+                for (var key in swatches) {
+                    var swatch = swatches[key];
+                    if (swatch) {
+                        var hex = swatch.getHex();
+                        imageColours.push({hex: hex, key: key});
+                    }
                 }
-                if(imageColours[i].key === 'LightMuted') {
-                    //var color = Color(imageColours[i].rgb);
-                    lightMuted = imageColours[i].hex;
+
+                for (var i = 0; i < imageColours.length; i++) {
+                    if (imageColours[i].key === 'Vibrant') {
+                        //var color = Color(imageColours[i].rgb);
+                        vibrant = imageColours[i].hex;
+                    }
+                    if (imageColours[i].key === 'Muted') {
+                        //var color = Color(imageColours[i].rgb);
+                        lightMuted = imageColours[i].hex;
+                    }
+                    if (imageColours[i].key === 'DarkMuted') {
+                        //var color = Color(imageColours[i].rgb);
+                        darkMuted = imageColours[i].hex;
+                    }
                 }
-                if(imageColours[i].key === 'DarkMuted') {
-                    //var color = Color(imageColours[i].rgb);
-                    darkMuted = imageColours[i].hex;
-                }
-            }
 
 
-
-            if(randomArtwork.contributors.length>0) {
+                if (randomArtwork.contributors.length > 0) {
+                    Artist.getByDbId(randomArtwork.contributors[0].id, function (err, artist) {
+                        res.render('index', {
+                            title: "Homepage",
+                            artwork: randomArtwork,
+                            background: bg,
+                            artist: artist,
+                            vibrant: vibrant,
+                            lightMuted: lightMuted,
+                            darkMuted: darkMuted
+                        });
+                    });
+                }
+                else {
+                    res.render('index', {title: "Homepage", artwork: randomArtwork, background: bg});
+                }
+            });
+        }
+        catch(e){
+            console.log("Vibrant Crashed!");
+            if (randomArtwork.contributors.length > 0) {
                 Artist.getByDbId(randomArtwork.contributors[0].id, function (err, artist) {
-                    res.render('index', {title: "Homepage", artwork: randomArtwork, background: bg, artist: artist, vibrant:vibrant, lightMuted:lightMuted, darkMuted:darkMuted});
+                    res.render('index', {
+                        title: "Homepage",
+                        artwork: randomArtwork,
+                        background: bg,
+                        artist: artist,
+                        vibrant: vibrant,
+                        lightMuted: lightMuted,
+                        darkMuted: darkMuted
+                    });
                 });
             }
             else {
                 res.render('index', {title: "Homepage", artwork: randomArtwork, background: bg});
             }
-        });
+        }
 
     });
 });
