@@ -16,7 +16,17 @@ router.get('/', function(req, res) {
         else{
             var bg = randomArtwork.thumbnailUrl.slice(0, -5) + "10.jpg";
         }
-        res.render('index', {title: "Homepage", artwork: randomArtwork, background:bg});
+
+        console.log(randomArtwork);
+
+        if(randomArtwork.contributors.length>0) {
+            Artist.getByDbId(randomArtwork.contributors[0].id, function (err, artist) {
+                res.render('index', {title: "Homepage", artwork: randomArtwork, background: bg, artist: artist});
+            });
+        }
+        else {
+            res.render('index', {title: "Homepage", artwork: randomArtwork, background: bg});
+        }
     });
 });
 
@@ -50,14 +60,16 @@ router.get('/next/:_id', function(req, res) {
 
 router.get('/prev/:_id', function(req, res) {
     var id = req.params._id;
-    Artwork.getPrev(id, function(randomArtwork) {
-        if(randomArtwork.thumbnailUrl == "null" || randomArtwork.thumbnailUrl == null){
-            var bg = "/img/no_bg.jpg";
+    Artwork.getPrev(id, function(artwork) {
+        if(artwork) {
+            if (artwork.thumbnailUrl == "null" || artwork.thumbnailUrl == null) {
+                var bg = "/img/no_bg.jpg";
+            }
+            else {
+                var bg = artwork.thumbnailUrl.slice(0, -5) + "10.jpg";
+            }
+            res.render('index', {title: "Homepage", artwork: artwork, background: bg});
         }
-        else{
-            var bg = randomArtwork.thumbnailUrl.slice(0, -5) + "10.jpg";
-        }
-        res.render('index', {title: "Homepage", artwork: randomArtwork, background:bg});
     });
 });
 

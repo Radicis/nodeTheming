@@ -10,7 +10,7 @@ var helpers = require('./middleware/helpers');
 var mongoose = require('mongoose');
 
 mongoose.connect(config.database, function(err) {
-    if (err) throw err;
+    if (err) console.log("Cannot connect to Db");
     console.log('Successfully connected to MongoDB');
 });
 

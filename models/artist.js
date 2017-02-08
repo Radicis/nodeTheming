@@ -1,50 +1,11 @@
 var mongoose = require('mongoose');
 
 var ArtistSchema = mongoose.Schema({
-    title: {
+    fc: {
         type: String,
-        required: true
     },
-    startDay: {
+    id: {
         type: Number,
-        default: 1
-    },
-    endDay: {
-        type: Number,
-        default: 5
-    },
-    hiddenDays: {
-        type: [Number],
-        default: [0,6]
-    },
-    startHour: {
-        type: Number,
-        default: 9
-    },
-    endHour: {
-        type: Number,
-        default: 18
-    },
-    created: {
-        type:Date,
-        default: Date.now
-    },
-    updated:{
-        type: Date
-    },
-    owner: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true
-    },
-    subscribed:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: false
-    }],
-    active: {
-        type: Boolean,
-        default: true
     }
 });
 
@@ -60,3 +21,8 @@ module.exports.getById = function(id, callback){
     Artist.findOne({_id: id}).exec(callback);
 };
 
+
+module.exports.getByDbId = function(id, callback){
+    console.log("Getting by db id");
+    Artist.findOne({id: id}).exec(callback);
+};

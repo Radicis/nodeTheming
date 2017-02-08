@@ -14,8 +14,7 @@ var ArtworkSchema = mongoose.Schema({
         type: Number
     },
     contributors: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Artist'
+        type: Object
     },
     creditLine: {
         type: String
@@ -44,12 +43,14 @@ var Artwork = module.exports = mongoose.model('Artwork', ArtworkSchema);
 
 module.exports.getAll = function(callback, limit){
     console.log("Getting all artworks");
-    return Artwork.find().limit(limit).exec(callback);
+    return Artwork.find()
+                .limit(limit).exec(callback);
 };
 
 module.exports.getById = function(id, callback){
     console.log("Getting by id");
-    Artwork.findOne({_id: id}).exec(callback);
+    Artwork.findOne({_id: id})
+        .exec(callback);
 };
 
 module.exports.getRandom = function(callback){
@@ -66,11 +67,11 @@ module.exports.getRandom = function(callback){
 
 module.exports.getNext = function(id, callback){
     console.log("Getting next for id: " + id);
-    Artwork.findOne({_id: {$gt: id}}).exec(callback);
+    Artwork.find({_id: {$gt: id}}).limit(1).exec(callback);
 };
 
 
 module.exports.getPrev = function(id, callback){
     console.log("Getting previous");
-    Artwork.findOne({_id: {$lt: id}}).exec(callback);
+    Artwork.find({_id: {"$lt": id}}).limit(1).exec(callback);
 };
