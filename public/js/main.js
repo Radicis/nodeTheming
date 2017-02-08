@@ -1,5 +1,6 @@
 
-$(document).ready(function() {
+
+$(document).ready(function(){
     var movementStrength = 25;
     var height = movementStrength / $(window).height();
     var width = movementStrength / $(window).width();
@@ -11,4 +12,6 @@ $(document).ready(function() {
         $('#full-screen').css("top", newvalueY+"px")
         $('#full-screen').css("left", newvalueX+"px");
     });
+
 });
+

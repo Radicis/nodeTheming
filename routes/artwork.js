@@ -3,7 +3,6 @@ var router = express.Router();
 var Artwork = require('../models/artwork');
 var middleware = require('../middleware/helpers');
 
-
 // Get listing of all timetables
 router.get('/', function(req, res) {
     Artwork.getAll(function(err, table){

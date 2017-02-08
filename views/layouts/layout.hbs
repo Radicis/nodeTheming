@@ -8,22 +8,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="/css/normalize.min.css">
+    <link rel="stylesheet" href="/css/lightbox.min.css">
     <link rel="stylesheet" href="/css/main.css">
+
+    <style>
+        .vibrant{
+            color:{{vibrant}} !important;
+        }
+        .darkMuted{
+            color:{{darkMuted}} !important;
+        }
+        .lightMuted{
+            background-color:{{lightMuted}} !important;
+        }
+    </style>
+
+
 </head>
 <body>
 
-<header>
+<header class="lightMuted">
     <nav>
         <ul>
             <li class="brand"><img src="/img/logo.png" /></li>
-            <li class="nav-item"><a href="#">About</a></li>
-            <li class="nav-item"><a href="#">Artists</a></li>
-            <li class="nav-item"><a href="#">Art</a></li>
-            <li class="nav-item active"><a href="#">Home</a></li>
+            <li class="nav-item"><a class="darkMuted" href="#">About</a></li>
+            <li class="nav-item"><a class="darkMuted" href="#">Artists</a></li>
+            <li class="nav-item"><a class="darkMuted" href="#">Art</a></li>
+            <li class="nav-item active"><a class="vibrant" href="#">Home</a></li>
         </ul>
-
     </nav>
-
 </header>
 
 {{{ body }}}
@@ -32,6 +45,7 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+<script src="/js/vendor/lightbox.min.js"></script>
 <script src="/js/main.js"></script>
 </body>
 </html>

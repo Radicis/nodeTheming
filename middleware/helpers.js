@@ -1,6 +1,6 @@
 module.exports.getFullSizeImage = function(thumbnailUrl){
     if(thumbnailUrl === null || typeof thumbnailUrl === "undefined") {
-        return thumbnailUrl.slice(0, -5) + "10.jpg";
+        return thumbnailUrl.slice(0, -5) + "9.jpg";
     }
 };
 

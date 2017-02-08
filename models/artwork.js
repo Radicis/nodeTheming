@@ -65,6 +65,21 @@ module.exports.getRandom = function(callback){
 
 };
 
+module.exports.getRandoms = function(callback){
+    console.log("Getting random");
+    Artwork.count(function(err, count){
+        if(err){
+
+        }
+        var rand = Math.floor(Math.random() * count);
+        Artwork.find().skip(rand)
+            .limit(6)
+            .exec(callback);
+    });
+
+};
+
+
 module.exports.getNext = function(id, callback){
     console.log("Getting next for id: " + id);
     Artwork.find({_id: {$gt: id}}).limit(1).exec(callback);
