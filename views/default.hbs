@@ -1,0 +1,23 @@
+<div class="container content">
+    <div class="row">
+        {{#if sidebarLeft}}
+            <div class="col-md-3">
+                {{>sidebarLeft}}
+            </div>
+        {{/if}}
+
+        {{#if mainContent}}
+            <div class="{{#if sidebarLeft}}col-md-6{{/if}}{{#unless sidebarLeft}}col-md-12{{/unless}}">
+                {{>mainContent}}
+            </div>
+        {{else}}
+            <p>No Content</p>
+        {{/if}}
+
+        {{#if sidebarRight}}
+            <div class="col-md-3">
+                {{>sidebarRight}}
+            </div>
+        {{/if}}
+    </div>
+</div>

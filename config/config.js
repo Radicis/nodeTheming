@@ -11,7 +11,7 @@ module.exports = {
         topNav: {
             brand: {
                 title: "Tate Gallery",
-                imgUrl: ""
+                url: "/img/logo.png"
             },
             menuItems: [
                 {
@@ -40,7 +40,7 @@ module.exports = {
             modules:[
 
             ],
-            copyright:'Design &copy;Adam Lloyd 2017 all content &copy; <a href="https://github.com/tategallery/collection#usage" target="_blank">Tate Gallery</a>'
+            copyright:'Design &copy;Adam Lloyd 2017. All content &copy; <a href="https://github.com/tategallery/collection#usage" target="_blank">Tate Gallery</a>'
         }
     }
 };

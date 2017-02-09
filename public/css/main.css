@@ -36,6 +36,11 @@ a{
     float:right;
 }
 
+.navbar img{
+    max-height:50px;
+    margin-top:-15px;
+}
+
 .navbar ul {
     overflow: auto;
     list-style-type: none;

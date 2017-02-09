@@ -26,79 +26,54 @@ router.get('/', function(req, res) {
             isHomePage: true
         });
 
-
         context.mainContent.homepage.artwork = randomArtwork;
         context.mainContent.homepage.background = bg;
 
-        console.log(context);
-
-        var imageColours = [];
-
-        var vibrant, lightMuted, darkMuted;
-
         try {
-
-            Vibrant.from(randomArtwork.thumbnailUrl).getPalette(function (err, swatches) {
-                if (err) throw err;
-                for (var key in swatches) {
-                    var swatch = swatches[key];
-                    if (swatch) {
-                        var hex = swatch.getHex();
-                        imageColours.push({hex: hex, key: key});
-                    }
+            helpers.getImageColours(randomArtwork.thumbnailUrl).then(function(colours){
+                context.colours = colours;
+                if (randomArtwork.contributors.length > 0) {
+                    Artist.getByDbId(randomArtwork.contributors[0].id, function (err, artist) {
+                        context.artist = artist;
+                        res.render('default', context);
+                    });
                 }
-
-                for (var i = 0; i < imageColours.length; i++) {
-                    if (imageColours[i].key === 'Vibrant') {
-                        //var color = Color(imageColours[i].rgb);
-                        vibrant = imageColours[i].hex;
-                    }
-                    if (imageColours[i].key === 'Muted') {
-                        //var color = Color(imageColours[i].rgb);
-                        lightMuted = imageColours[i].hex;
-                    }
-                    if (imageColours[i].key === 'DarkMuted') {
-                        //var color = Color(imageColours[i].rgb);
-                        darkMuted = imageColours[i].hex;
-                    }
+                else {
+                    res.render('default', context);
                 }
-                context.vibrant = vibrant;
-                context.lightMuted = lightMuted;
-                context.darkMuted = darkMuted;
             });
+
         }
         catch(e){
-            console.log("Vibrant Crashed!");
-        }
-
-        if (randomArtwork.contributors.length > 0) {
-            Artist.getByDbId(randomArtwork.contributors[0].id, function (err, artist) {
-                context.artist = artist;
+            console.log("Vibrant Crashed!: " + e);
+            if (randomArtwork.contributors.length > 0) {
+                Artist.getByDbId(randomArtwork.contributors[0].id, function (err, artist) {
+                    context.artist = artist;
+                    res.render('default', context);
+                });
+            }
+            else {
                 res.render('default', context);
-            });
+            }
         }
-        else {
-            res.render('default', context);
-        }
-
     });
 });
 
 
 
 
-router.get('/:_id', function(req, res) {
-    var id = req.params._id;
-    Artwork.getById(function(id, randomArtwork) {
-        if(randomArtwork.thumbnailUrl == "null" || randomArtwork.thumbnailUrl == null){
-            var bg = "/img/no_bg.jpg";
-        }
-        else{
-            var bg = randomArtwork.thumbnailUrl.slice(0, -5) + "10.jpg";
-        }
-        res.render('index', {title: "Homepage", artwork: randomArtwork, background:bg});
-    });
-});
+// router.get('/:_id', function(req, res) {
+//     var id = req.params._id;
+//     Artwork.getById(function(id, randomArtwork) {
+//         if(randomArtwork.thumbnailUrl == "null" || randomArtwork.thumbnailUrl == null){
+//             var bg = "/img/no_bg.jpg";
+//         }
+//         else{
+//             var bg = randomArtwork.thumbnailUrl.slice(0, -5) + "10.jpg";
+//         }
+//         res.render('index', {title: "Homepage", artwork: randomArtwork, background:bg});
+//     });
+// });
 
 
 module.exports = router;
