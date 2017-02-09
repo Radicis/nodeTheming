@@ -5,10 +5,10 @@ var PageSchema = mongoose.Schema({
     title: {
         type: String
     },
-    modules: {
+    modules: [{
         type: mongoose.Schema.ObjectId,
         ref: 'Module'
-    }
+    }]
 });
 
 var Page = module.exports = mongoose.model('Page', PageSchema);
