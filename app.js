@@ -6,6 +6,7 @@ var hbs = require('express-handlebars');
 var config = require('./config/config');
 var helpers = require('./middleware/helpers');
 
+
 // Connect to MongoDb
 var mongoose = require('mongoose');
 
@@ -21,12 +22,14 @@ var exhbs = hbs.create({
     helpers: helpers,
     extname: 'hbs',
     defaultLayout: 'layout',
-    layoutsDir:__dirname + '/views/layouts/'
+    layoutsDir:__dirname + '/views/layouts/',
+    partialsDir: __dirname + '/views/partials/'
 });
 
 app.engine('hbs', exhbs.engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
