@@ -4,32 +4,13 @@ var Artist = require('../models/artist');
 var Artwork = require('../models/artwork');
 var helpers = require('../middleware/helpers');
 var Vibrant = require('node-vibrant');
-var Color = require('color');
-
-// router.get('/', function(req, res) {
-//
-//     // Artwork.getRandoms(function(err, artworks) {
-//     //     if (err) {
-//     //         throw err;
-//     //     }
-//     //     console.log(artworks);
-//     //     console.log("I found: " + artworks.length);
-//     //     for(var i=0;i<artworks.length;i++){
-//     //         if(artworks[i].thumbnailUrl == "null" || artworks[i].thumbnailUrl == null){
-//     //             artworks[i].bg = "/img/no_bg.jpg";
-//     //         }
-//     //         else{
-//     //             artworks[i].bg = artworks[i].thumbnailUrl.slice(0, -5) + "10.jpg";
-//     //         }
-//     //     }
-//     //     res.render('index', {title: "Homepage", artworks: artworks});
-//     // });
-//
-//
-//
-// });
+var config = require('../config/config');
 
 router.get('/', function(req, res) {
+
+    var context = config.context;
+    context.title = "Homepage";
+
     Artwork.getRandom(function(err, randomArtwork) {
         if (err) {
             throw err;
@@ -41,8 +22,15 @@ router.get('/', function(req, res) {
             var bg = randomArtwork.thumbnailUrl.slice(0, -5) + "10.jpg";
         }
 
-        // var img = new image();
-        // img.src = randomArtwork.thumbnailUrl;
+        context.mainContent.modules.push({
+            isHomePage: true
+        });
+
+
+        context.mainContent.homepage.artwork = randomArtwork;
+        context.mainContent.homepage.background = bg;
+
+        console.log(context);
 
         var imageColours = [];
 
@@ -74,44 +62,23 @@ router.get('/', function(req, res) {
                         darkMuted = imageColours[i].hex;
                     }
                 }
-
-
-                if (randomArtwork.contributors.length > 0) {
-                    Artist.getByDbId(randomArtwork.contributors[0].id, function (err, artist) {
-                        res.render('index', {
-                            title: "Homepage",
-                            artwork: randomArtwork,
-                            background: bg,
-                            artist: artist,
-                            vibrant: vibrant,
-                            lightMuted: lightMuted,
-                            darkMuted: darkMuted
-                        });
-                    });
-                }
-                else {
-                    res.render('index', {title: "Homepage", artwork: randomArtwork, background: bg});
-                }
+                context.vibrant = vibrant;
+                context.lightMuted = lightMuted;
+                context.darkMuted = darkMuted;
             });
         }
         catch(e){
             console.log("Vibrant Crashed!");
-            if (randomArtwork.contributors.length > 0) {
-                Artist.getByDbId(randomArtwork.contributors[0].id, function (err, artist) {
-                    res.render('index', {
-                        title: "Homepage",
-                        artwork: randomArtwork,
-                        background: bg,
-                        artist: artist,
-                        vibrant: vibrant,
-                        lightMuted: lightMuted,
-                        darkMuted: darkMuted
-                    });
-                });
-            }
-            else {
-                res.render('index', {title: "Homepage", artwork: randomArtwork, background: bg});
-            }
+        }
+
+        if (randomArtwork.contributors.length > 0) {
+            Artist.getByDbId(randomArtwork.contributors[0].id, function (err, artist) {
+                context.artist = artist;
+                res.render('default', context);
+            });
+        }
+        else {
+            res.render('default', context);
         }
 
     });

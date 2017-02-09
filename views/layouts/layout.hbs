@@ -7,8 +7,9 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="/css/normalize.min.css">
-    <link rel="stylesheet" href="/css/lightbox.min.css">
+    <link rel="stylesheet" href="/css/vendor/normalize.min.css">
+    <link rel="stylesheet" href="/css/vendor/lightbox.min.css">
+    <link rel="stylesheet" href="/css/vendor/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main.css">
 
     <style>
@@ -18,26 +19,54 @@
         .darkMuted{
             color:{{darkMuted}} !important;
         }
+        a[class="darkMuted"]:hover{
+            color:{{vibrant}} !important;
+        }
         .lightMuted{
             background-color:{{lightMuted}} !important;
         }
     </style>
-
-
 </head>
 <body>
 
 <header>
-    {{> top-nav}}
+    {{#if topNav}}
+        {{> topNav}}
+    {{/if}}
 </header>
 
-{{{ body }}}
+<div class="container content">
+    <div class="row">
+        {{#if sidebarLeft}}
+            <div class="col-md-3">
+                {{>sidebarLeft}}
+            </div>
+        {{/if}}
 
-<footer><p>Design &copy;Adam Lloyd 2017 all content &copy; <a href="https://github.com/tategallery/collection#usage" target="_blank">Tate Gallery</a></p></footer>
+        {{#if mainContent}}
+            <div class="{{#if sidebarLeft}}col-md-6{{/if}}{{#unless sidebarLeft}}col-md-12{{/unless}}">
+                {{>mainContent}}
+            </div>
+        {{else}}
+            <p>No Content</p>
+        {{/if}}
+
+        {{#if sidebarRight}}
+            <div class="col-md-3">
+                {{>sidebarRight}}
+            </div>
+        {{/if}}
+    </div>
+</div>
+
+{{#if footer}}
+    {{>footer}}
+{{/if}}
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 <script src="/js/vendor/lightbox.min.js"></script>
+<script src="/js/vendor/bootstrap.min.js"></script>
 <script src="/js/main.js"></script>
 </body>
 </html>

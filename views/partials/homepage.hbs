@@ -1,11 +1,10 @@
 <div id="full-screen" style="background-image: url({{background}});">
 
 </div>
-
 <div class="homepage-main">
-    <div>
-        <div class="col-70">
-            <h1 class="vibrant">{{truncate artwork.title 40}}</h1>
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="vibrant">{{truncate artwork.title 30}}</h1>
             <ul class="darkMuted">
                 <li><strong>Artist: </strong> {{#each artwork.contributors}}<a class="vibrant" href="/artist/{{this.id}}">{{this.fc}}</a>{{/each}}</li>
                 <li><strong>Medium: </strong>{{artwork.medium}}</li>
@@ -15,25 +14,18 @@
                 <li><strong>Url: </strong><a class="vibrant" href="{{artwork.url}}" target="_blank">{{truncate artwork.url 50}}</a></li>
             </ul>
         </div>
-        <div class="col-30 darkMuted">
+        <div class="col-md-4 darkMuted">
             {{#if artwork.thumbnailUrl}}
                 <a href="{{background}}" data-lightbox="{{artwork.title}}" data-title="{{artwork.title}}"><img src="{{artwork.thumbnailUrl}}" id="thumbnail" /></a>
             {{else}}
                 <img src="/img/no_image.gif" alt="No image" />
             {{/if}}
         </div>
-        <div class="col-100 credit-line clearfix">
+    </div>
+    <div class="row">
+        <div class="col-md-12 credit-line clearfix">
             <p><em>{{artwork.creditLine}}</em></p>
         </div>
-        <div class="col-100 clearfix">
-
-        </div>
     </div>
+
 </div>
-
-
-
-
-
-
-

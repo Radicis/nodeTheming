@@ -14,7 +14,11 @@ a{
 }
 
 
-header{
+.content{
+    min-height:400px;
+}
+
+.navbar{
     background-color:#fefefe;
     border-bottom:1px solid #999;
 }
@@ -24,54 +28,46 @@ header{
    Navigation
    ========================================================================== */
 
-nav{
+.navbar{
     padding:10px;
 }
 
-nav .brand img {
-    max-width:100px;
+.navbar-nav{
+    float:right;
 }
 
-nav ul {
+.navbar ul {
     overflow: auto;
     list-style-type: none;
     margin:0;
 }
 
-nav ul li {
-    float: right;
-    margin-left: 0;
+.navbar ul li {
     border-left: 1px solid #aaa;
-    padding: 14px 20px;
-    height:25px;
 }
 
-nav ul li:first-child {
+.navbar ul li:first-child {
     float:left;
     height:auto;
     border-left: none;
     padding:0;
 }
 
-nav ul li:last-child {
+.navbar ul li:last-child {
     border-right: none;
 }
 
-nav ul li a {
+.navbar ul li a {
     text-decoration: none;
     color: #ccc;
     text-transform: uppercase;
     -webkit-transition: all 0.5s ease;
 }
 
-nav ul li a:hover {
+.navbar ul li a:hover {
     color: #666;
 }
 
-nav ul li.active a {
-    font-weight: bold;
-    color: #333;
-}
 
 /* ==========================================================================
    Full Screen Homepage
@@ -98,13 +94,11 @@ nav ul li.active a {
 }
 
 .homepage-main{
-    background-color:rgba(255,255,255,0.85);
-    top: 25%;
-    width:100%;
-    position: absolute;
-    border-top: 1px solid #999;
-    border-bottom: 1px solid #999;
-    min-height:400px;
+    background-color:rgba(255,255,255,0.80);
+    margin-top:150px;
+    border: 1px solid #999;
+
+    min-height:300px;
 }
 
 .homepage-main > div{
@@ -124,61 +118,45 @@ nav ul li.active a {
     list-style-type: square;
 }
 
-.homepage-main ul li{
-
-}
 
 .credit-line {
-    margin-top: 300px;
     text-align: center;
     color: #555;
-
 }
-
-/* ==========================================================================
-   Ghetto Bootstrap
-   ========================================================================== */
-
-.col-70{
-    width:70%;
-    float:left;
-}
-
-.col-30{
-    width:30%;
-    float:left;
-}
-
-.col-100{
-    width:100%;
-}
-
 
 
 /* ==========================================================================
    Footer
    ========================================================================== */
 
-footer{
-    position:absolute;
-    bottom:0px;
-    display:block;
-    width:100%;
-    clea:both;
-}
+/*footer{*/
+    /*position:absolute;*/
+    /*bottom:0px;*/
+    /*display:block;*/
+    /*width:100%;*/
+    /*clea:both;*/
+/*}*/
 
-footer p{
+.footer p{
     text-align:center;
     color:#222;
     font-size:0.8em;
 }
 
-footer p a{
+.footer p a{
     color:#222;
 }
 
 footer p a:hover{
     color:#666;
+}
+
+.footer{
+    margin-top:60px;
+}
+
+.copyright{
+    text-align:center;
 }
 
 /* ==========================================================================
