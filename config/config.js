@@ -4,10 +4,8 @@ module.exports = {
     'database': 'mongodb://localhost/tate',
     'port' :  process.env.PORT || 3030, // used to create, sign, and verify tokens
 
-    context: {
-
-        brand: '/img/logo.png',
-
+    global: {
+        title: "Tate Gallery",
         topNav: {
             brand: {
                 title: "Tate Gallery",
@@ -32,15 +30,30 @@ module.exports = {
                 }
             ]
         },
-        mainContent: {
-            homepage: {},
-            modules:[ ]
-        },
+
         footer:{
             modules:[
 
             ],
             copyright:'Design &copy;Adam Lloyd 2017. All content &copy; <a href="https://github.com/tategallery/collection#usage" target="_blank">Tate Gallery</a>'
+        }
+    },
+
+    homepage: {
+        mainContent: {
+            hero: {},
+            modules: []
+        }
+    },
+
+    artworks: {
+        mainContent: {
+            modules: [
+                {
+                    title: 'Artwork',
+                    collection: []
+                }
+            ]
         }
     }
 };

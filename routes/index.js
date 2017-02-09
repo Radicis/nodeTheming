@@ -8,8 +8,9 @@ var config = require('../config/config');
 
 router.get('/', function(req, res) {
 
-    var context = config.context;
-    context.title = "Homepage";
+    var context = config.global;
+
+    context.page = config.homepage;
 
     Artwork.getRandom(function(err, randomArtwork) {
         if (err) {
@@ -19,15 +20,11 @@ router.get('/', function(req, res) {
             var bg = "/img/no_bg.jpg";
         }
         else{
-            var bg = randomArtwork.thumbnailUrl.slice(0, -5) + "10.jpg";
+            var bg = randomArtwork.thumbnailUrl.slice(0, -5) + "9.jpg";
         }
 
-        context.mainContent.modules.push({
-            isHomePage: true
-        });
-
-        context.mainContent.homepage.artwork = randomArtwork;
-        context.mainContent.homepage.background = bg;
+        context.page.mainContent.hero.artwork = randomArtwork;
+        context.page.mainContent.hero.background = bg;
 
         try {
             helpers.getImageColours(randomArtwork.thumbnailUrl).then(function(colours){

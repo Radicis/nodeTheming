@@ -43,8 +43,7 @@ var Artwork = module.exports = mongoose.model('Artwork', ArtworkSchema);
 
 module.exports.getAll = function(callback, limit){
     console.log("Getting all artworks");
-    return Artwork.find()
-                .limit(limit).exec(callback);
+    return Artwork.find().limit(30).exec(callback);
 };
 
 module.exports.getById = function(id, callback){
@@ -57,7 +56,7 @@ module.exports.getRandom = function(callback){
     console.log("Getting random");
     Artwork.count(function(err, count){
         if(err){
-
+            console.log(err);
         }
         var rand = Math.floor(Math.random() * count);
         Artwork.findOne().skip(rand).exec(callback);

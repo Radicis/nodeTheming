@@ -1,7 +1,7 @@
-{{#if mainContent.homepage}}
-    {{>homepage mainContent.homepage}}
+{{#if page.mainContent.hero}}
+    {{>homepage page.mainContent.hero}}
 {{/if}}
-{{#each mainContent.modules}}
+{{#each page.mainContent.modules}}
 
     {{#if this.title}}
         <div class="row clearfix">
@@ -12,6 +12,9 @@
         <div cass="row">
             {{{this.content}}}
         </div>
+    {{/if}}
+    {{#if this.collection}}
+        {{>list collection=this.collection}}
     {{/if}}
 
 {{/each}}

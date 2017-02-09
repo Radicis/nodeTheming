@@ -43,6 +43,5 @@ app.set('superSecret', config.secret); // secret variable
 app.use('/', require('./routes/index'));
 app.use('/artwork', require('./routes/artwork'));
 app.use('/artist', require('./routes/artist'));
-app.use('/page', require('./routes/page'));
 
 module.exports = app;

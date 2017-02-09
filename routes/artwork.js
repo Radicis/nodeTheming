@@ -2,15 +2,24 @@ var express = require('express');
 var router = express.Router();
 var Artwork = require('../models/artwork');
 var middleware = require('../middleware/helpers');
+var config = require('../config/config');
 
 // Get listing of all timetables
 router.get('/', function(req, res) {
-    Artwork.getAll(function(err, table){
+
+    var context = config.global;
+
+    context.page = config.artworks;
+
+    Artwork.getAll(function(err, artworks){
         if(err){
-            console.log(err);
-            res.json(err);
+            res.render('error', {error:err});
         }
-        res.json(table);
+
+        context.page.mainContent.modules[0].collection = artworks;
+
+
+        res.render('default', context);
     });
 });
 

@@ -16,6 +16,7 @@ a{
 
 .content{
     min-height:400px;
+    margin-top:100px;
 }
 
 .navbar{
@@ -49,13 +50,6 @@ a{
 
 .navbar ul li {
     border-left: 1px solid #aaa;
-}
-
-.navbar ul li:first-child {
-    float:left;
-    height:auto;
-    border-left: none;
-    padding:0;
 }
 
 .navbar ul li:last-child {
@@ -100,9 +94,8 @@ a{
 
 .homepage-main{
     background-color:rgba(255,255,255,0.80);
-    margin-top:150px;
+    margin-top:100px;
     border: 1px solid #999;
-
     min-height:300px;
 }
 
@@ -116,7 +109,7 @@ a{
 }
 
 .homepage-main h1{
-    text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);
+    text-shadow: 1px 1px 1px rgba(150, 150, 150, 0.8);
 }
 
 .homepage-main ul{
@@ -133,14 +126,6 @@ a{
 /* ==========================================================================
    Footer
    ========================================================================== */
-
-/*footer{*/
-    /*position:absolute;*/
-    /*bottom:0px;*/
-    /*display:block;*/
-    /*width:100%;*/
-    /*clea:both;*/
-/*}*/
 
 .footer p{
     text-align:center;
