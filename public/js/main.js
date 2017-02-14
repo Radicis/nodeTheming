@@ -11,6 +11,13 @@ $(document).ready(function(){
         var newvalueY = height * pageY * -2 - 50;
         $('#full-screen').css("top", newvalueY+"px")
         $('#full-screen').css("left", newvalueX+"px");
+        //
+        // var top = $('#homepage-main').css("margin-top");
+        //
+        // console.log(top.slice(0, -2));
+        //
+        // $('#homepage-main').css("margin-top", newvalueY+40 + 100 +"px");
+        // $('#homepage-main').css("margin-left", newvalueY+40 +"px");
     });
 
 });

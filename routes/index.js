@@ -20,7 +20,15 @@ router.get('/:type', function(req, res) {
     var displaySchema = config.displaySchema[type];
     var collection = displaySchema.collection;
 
+    helpers.searchIMDBTitles("Nine").then(function(titles){
+        helpers.getMovieById(titles[0].id).then(function(details){
+            details.title = titles[0].title;
+            console.log(details);
+        })
+    });
+
     db.collection(collection).count(function(err, count){
+        console.log("I found: " + count);
         if(err){
             console.log(err);
         }
@@ -41,7 +49,7 @@ router.get('/:type', function(req, res) {
                 },
                 field2: {
                     ref: object[displaySchema['field2'].ref],
-                    title: object[displaySchema['field1'].title]
+                    title: object[displaySchema['field2'].title]
                 }
             };
 

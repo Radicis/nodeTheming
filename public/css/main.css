@@ -92,28 +92,29 @@ a{
     z-index:-999;
 }
 
-.homepage-main{
+#homepage-main{
     background-color:rgba(255,255,255,0.80);
     margin-top:100px;
     border: 1px solid #999;
     min-height:300px;
+    width:100%;
 }
 
-.homepage-main > div{
+#homepage-main > div{
     padding:30px;
 }
 
-.homepage-main img{
+#homepage-main img{
     border:1px solid #222;
     max-width:250px;
     max-height:250px;
 }
 
-.homepage-main h1{
+#homepage-main h1{
     text-shadow: 1px 1px 1px rgba(150, 150, 150, 0.8);
 }
 
-.homepage-main ul{
+#homepage-main ul{
     list-style-type: square;
 }
 

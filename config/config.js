@@ -1,8 +1,10 @@
 module.exports = {
 
-    'secret': 'robotmonkeylaserexplosion',
-    'database': 'mongodb://localhost/tate',
-    'port' :  process.env.PORT || 3030, // used to create, sign, and verify tokens
+    secret: 'robotmonkeylaserexplosion',
+    database: 'mongodb://localhost/tate',
+    port :  process.env.PORT || 3030, // used to create, sign, and verify tokens
+
+    imdb_key: '1635b361-a6e4-46e2-83d3-0a9b3971e33c',
 
     displaySchema: {
         "artwork": {
@@ -44,6 +46,27 @@ module.exports = {
             field2: {
                 ref: "Runtime",
                 title: "Runtime"
+            }
+        },
+
+        "imdb": {
+            brand: {
+                title: "Tate Gallery",
+                url: "/img/logo_imdb.png"
+            },
+            collection: '',
+            title: "title",
+            thumbnail: "image",
+            url: "image",
+            released: "Released",
+            fullSize: "image",
+            field1:{
+                ref: "description",
+                title: "Description"
+            },
+            field2: {
+                ref: "review",
+                title: "Review"
             }
         }
     },

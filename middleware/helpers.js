@@ -1,5 +1,6 @@
 var Vibrant = require('node-vibrant');
 var q = require('q');
+var config = require('../config/config');
 
 module.exports.getFullSizeImage = function(thumbnailUrl){
     if(thumbnailUrl === null || typeof thumbnailUrl === "undefined") {
@@ -60,5 +61,25 @@ module.exports.getImageColours = function(url){
         defer.resolve(colours);
     });
 
+    return defer.promise;
+};
+
+module.exports.searchIMDBTitles = function(term){
+    var defer = q.defer();
+    var request = require('request');
+    request.post("http://imdb.wemakesites.net/api/search?q=" + term + "&api_key=" + config.imdb_key, {json:true}, function(err, res, body){
+            defer.resolve(body.data.results.titles);
+        }
+    );
+    return defer.promise;
+};
+
+module.exports.getMovieById = function(id){
+    var defer = q.defer();
+    var request = require('request');
+    request.post("http://imdb.wemakesites.net/api/" + id + "?api_key=" + config.imdb_key, {json:true}, function(err, res, body){
+            defer.resolve(body.data);
+        }
+    );
     return defer.promise;
 };
