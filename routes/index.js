@@ -1,76 +1,69 @@
 var express = require('express');
 var router = express.Router();
-var Artist = require('../models/artist');
-var Artwork = require('../models/artwork');
 var helpers = require('../middleware/helpers');
 var Vibrant = require('node-vibrant');
 var config = require('../config/config');
 
-router.get('/', function(req, res) {
+// Connect to MongoDb
+var mongoose = require('mongoose');
+
+var db = mongoose.connection;
+
+router.get('/:type', function(req, res) {
+
+    var type = req.params.type;
 
     var context = config.global;
 
     context.page = config.homepage;
 
-    Artwork.getRandom(function(err, randomArtwork) {
-        if (err) {
-            throw err;
-        }
-        if(randomArtwork.thumbnailUrl == "null" || randomArtwork.thumbnailUrl == null){
-            var bg = "/img/no_bg.jpg";
-        }
-        else{
-            var bg = randomArtwork.thumbnailUrl.slice(0, -5) + "9.jpg";
-        }
+    var displaySchema = config.displaySchema[type];
+    var collection = displaySchema.collection;
 
-        context.page.mainContent.hero.artwork = randomArtwork;
-        context.page.mainContent.hero.background = bg;
+    db.collection(collection).count(function(err, count){
+        if(err){
+            console.log(err);
+        }
+        var rand = Math.floor(Math.random() * count);
+        db.collection(collection).findOne(function(error, object) {
+            if (error) {
+                throw error;
+            }
 
-        try {
-            helpers.getImageColours(randomArtwork.thumbnailUrl).then(function(colours){
-                context.colours = colours;
-                if (randomArtwork.contributors.length > 0) {
-                    Artist.getByDbId(randomArtwork.contributors[0].id, function (err, artist) {
-                        context.artist = artist;
-                        res.render('default', context);
-                    });
+            context.page.mainContent.hero.object = {
+                title: object[displaySchema['title']],
+                thumbnail: object[displaySchema['thumbnail']],
+                url: object[displaySchema['url']],
+                date: object[displaySchema['date']],
+                field1: {
+                    ref: object[displaySchema['field1'].ref],
+                    title: object[displaySchema['field1'].title]
+                },
+                field2: {
+                    ref: object[displaySchema['field2'].ref],
+                    title: object[displaySchema['field1'].title]
                 }
-                else {
-                    res.render('default', context);
-                }
-            });
+            };
 
-        }
-        catch(e){
-            console.log("Vibrant Crashed!: " + e);
-            if (randomArtwork.contributors.length > 0) {
-                Artist.getByDbId(randomArtwork.contributors[0].id, function (err, artist) {
-                    context.artist = artist;
+            context.brand = displaySchema.brand;
+
+            console.log(context.brand);
+
+            context.page.mainContent.hero.object.bg = object[displaySchema['thumbnail']];
+
+            try {
+                helpers.getImageColours(context.page.mainContent.hero.object.thumbnail).then(function(colours){
+                    context.colours = colours;
                     res.render('default', context);
                 });
             }
-            else {
+            catch(e){
+                console.log("Vibrant Crashed!: " + e);
                 res.render('default', context);
             }
-        }
+        });
     });
 });
-
-
-
-
-// router.get('/:_id', function(req, res) {
-//     var id = req.params._id;
-//     Artwork.getById(function(id, randomArtwork) {
-//         if(randomArtwork.thumbnailUrl == "null" || randomArtwork.thumbnailUrl == null){
-//             var bg = "/img/no_bg.jpg";
-//         }
-//         else{
-//             var bg = randomArtwork.thumbnailUrl.slice(0, -5) + "10.jpg";
-//         }
-//         res.render('index', {title: "Homepage", artwork: randomArtwork, background:bg});
-//     });
-// });
 
 
 module.exports = router;

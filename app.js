@@ -15,6 +15,7 @@ mongoose.connect(config.database, function(err) {
     console.log('Successfully connected to MongoDB');
 });
 
+
 var app = express();
 
 
@@ -41,7 +42,7 @@ app.set('superSecret', config.secret); // secret variable
 
 // Routes
 app.use('/', require('./routes/index'));
-app.use('/artwork', require('./routes/artwork'));
-app.use('/artist', require('./routes/artist'));
+app.use('/display', require('./routes/display'));
+
 
 module.exports = app;

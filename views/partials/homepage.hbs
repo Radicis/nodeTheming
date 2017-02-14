@@ -1,22 +1,20 @@
-<div id="full-screen" style="background-image: url({{background}});">
+<div id="full-screen" style="background-image: url({{object.bg}});">
 
 </div>
 <div class="homepage-main">
     <div class="row">
         <div class="col-md-8">
-            <h1 class="vibrant">{{truncate artwork.title 30}}</h1>
+            <h1 class="vibrant">{{truncate object.title 30}}</h1>
             <ul class="darkMuted">
-                <li><strong>Artist: </strong> {{#each artwork.contributors}}<a class="vibrant" href="/artist/{{this.id}}">{{this.fc}}</a>{{/each}}</li>
-                <li><strong>Medium: </strong>{{artwork.medium}}</li>
-                <li><strong>Dimensions: </strong> {{artwork.dimensions}}</li>
-                <li><strong>Date: </strong>{{artwork.dateText}}</li>
-                <li><strong>Acquisition Date: </strong>{{artwork.acquisitionYear}}</li>
-                <li><strong>Url: </strong><a class="vibrant" href="{{artwork.url}}" target="_blank">{{truncate artwork.url 50}}</a></li>
+                <li><strong>{{object.field1.title}}: </strong>{{object.field1.ref}}</li>
+                <li><strong>{{object.field2.title}}: </strong> {{object.field2.ref}}</li>
+                <li><strong>Date: </strong>{{object.date}}</li>
+                <li><strong>Url: </strong><a class="vibrant" href="{{object.url}}" target="_blank">{{truncate object.url 50}}</a></li>
             </ul>
         </div>
         <div class="col-md-4 darkMuted">
-            {{#if artwork.thumbnailUrl}}
-                <a href="{{background}}" data-lightbox="{{artwork.title}}" data-title="{{artwork.title}}"><img src="{{artwork.thumbnailUrl}}" id="thumbnail" /></a>
+            {{#if object.thumbnail}}
+                <a href="{{object.thumbnail}}" data-lightbox="{{object.title}}" data-title="{{object.title}}"><img src="{{object.thumbnail}}" id="thumbnail" /></a>
             {{else}}
                 <img src="/img/no_image.gif" alt="No image" />
             {{/if}}
@@ -24,10 +22,9 @@
     </div>
     <div class="row text-center">
         <div class="col-md-12 credit-line clearfix">
-            <p><em>{{artwork.creditLine}}</em></p>
+            <!--<p><em>{{artwork.creditLine}}</em></p>-->
         </div>
         <a href="/" class="btn btn-default text-center">Get Another</a>
     </div>
-
 
 </div>

@@ -4,6 +4,51 @@ module.exports = {
     'database': 'mongodb://localhost/tate',
     'port' :  process.env.PORT || 3030, // used to create, sign, and verify tokens
 
+    displaySchema: {
+        "artwork": {
+            brand: {
+                title: "Tate Gallery",
+                url: "/img/logo.png"
+            },
+            collection: 'artworks',
+            title: "title",
+            thumbnail: "thumbnailUrl",
+            url: "url",
+            date: "dateText",
+            fullSize: "thumbnailUrl",
+            field1: {
+                ref: "all_artists",
+                title: "Artist"
+            },
+            field2: {
+                ref: "medium",
+                title: "Medium"
+            }
+        },
+
+        "movie": {
+            brand: {
+                title: "Tate Gallery",
+                url: "/img/logo_imdb.png"
+            },
+            collection: 'movies',
+            title: "Title",
+            thumbnail: "Poster",
+            url: "Poster",
+            date: "Released",
+            fullSize: "Poster",
+            field1:{
+                ref: "imdbRating",
+                title: "Rating"
+            },
+            field2: {
+                ref: "Runtime",
+                title: "Runtime"
+            }
+        }
+    },
+
+
     global: {
         title: "Tate Gallery",
         topNav: {

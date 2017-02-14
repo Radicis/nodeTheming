@@ -106,6 +106,7 @@ a{
 .homepage-main img{
     border:1px solid #222;
     max-width:250px;
+    max-height:250px;
 }
 
 .homepage-main h1{

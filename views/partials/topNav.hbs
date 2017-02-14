@@ -7,11 +7,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            {{#if topNav.brand}}
-                {{#if topNav.brand.url}}
-                    <a class="navbar-brand darkMuted" href="#"><img src="{{topNav.brand.url}}"  alt="{{topNav.brand.title}}"/></a>
+            {{#if brand}}
+                {{#if brand.url}}
+                    <a class="navbar-brand darkMuted" href="#"><img src="{{brand.url}}"  alt="{{brand.title}}"/></a>
                 {{else}}
-                    <a class="navbar-brand darkMuted" href="#">{{topNav.brand.title}}</a>
+                    <a class="navbar-brand darkMuted" href="#">{{brand.title}}</a>
                 {{/if}}
 
             {{/if}}
