@@ -1,51 +1,67 @@
 <div class="row">
-    <h2>Mapping</h2>
     <form action="/config/" method="post">
         <fieldset>
-            <h4>Schema</h4>
-            <br>
             <div class="form-group row">
-                <label class="col-md-2">Collection Name:</label>
-                <div class="col-md-10">
-                    <input class="form-control" name="collectionName" type="text" />
+                <div class="col-md-12">
+                    <label>Collection Name:</label>
+                    <input class="form-control" name="collectionName" type="text" value="{{schema.collectionName}}" required />
+                    <p class="form-text text-muted">
+                        The name of the mongoDb collection.
+                    </p>
                 </div>
             </div>
-            <hr>
-            <h4>Object Property Mapping</h4>
-            <br>
+
             <div class="form-group row">
-                <label class="col-md-2">Title:</label>
-                <div class="col-md-10">
-                    <input class="form-control" name="title" type="text" />
+                <div class="col-md-6">
+                    <label>Title:</label>
+                    <input class="form-control" name="title" value="{{schema.title}}" type="text" required />
+                    <p class="form-text text-muted">
+                        The property you wish to represent the objects Title
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <label>Url:</label>
+                    <input class="form-control" name="url" value="{{schema.url}}" type="text" />
+                    <p class="form-text text-muted">
+                        Link to the external object
+                    </p>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-2">Url:</label>
-                <div class="col-md-10">
-                    <input class="form-control" name="url" type="text" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-2">Thumbnail Url:</label>
-                <div class="col-md-10">
+                <div class="col-md-6">
+                    <label>Thumbnail Url:</label>
+
                     <input class="form-control" name="thumbnail" type="text" />
+                    <p class="form-text text-muted">
+                        Url for the thumbnail image
+                    </p>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-2">Fullsize Url:</label>
-                <div class="col-md-10">
+                <div class="col-md-6">
+                    <label>Full Size Url:</label>
                     <input class="form-control" name="fullSize" type="text" />
+                    <p class="form-text text-muted">
+                        Url for the fullsize image
+                    </p>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-2">Date:</label>
-                <div class="col-md-10">
+                <div class="col-md-6">
+                    <label>Date:</label>
                     <input class="form-control" name="date" type="text" />
+                    <p class="form-text text-muted">
+                        Object property you wish to represent the date
+                    </p>
                 </div>
             </div>
             <hr>
-            <h4>Custom Fields</h4>
-            <br>
+            <div class="form-group row">
+                <div class="col-md-12">
+                    <h4>Custom Fields</h4>
+                    <p class="form-text text-muted">
+                        Free Type fields. Map the label (visible in the view) to the property which contains the value
+                    </p>
+                </div>
+            </div>
 
             <div id="customFields">
 
@@ -59,10 +75,9 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <button class="pull-right btn btn-default" type="submit">Save</button>
+                    <button class="pull-right btn btn-primary" type="submit">Save Settings</button>
                 </div>
             </div>
-
 
         </fieldset>
     </form>

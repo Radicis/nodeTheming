@@ -6,11 +6,17 @@
         <div class="col-md-8">
             <h1 class="vibrant">{{truncate object.title 30}}</h1>
             <ul class="darkMuted">
-                {{#each object.customFields}}
-                    <li><strong>{{this.label}}: </strong>{{this.ref}}</li>
-                {{/each}}
-                <li><strong>Date: </strong>{{object.date}}</li>
-                <li><strong>Url: </strong><a class="vibrant" href="{{object.url}}" target="_blank">{{truncate object.url 50}}</a></li>
+                {{#if object.customFields}}
+                    {{#each object.customFields}}
+                        <li><strong>{{truncate this.label 20}}: </strong>{{truncate this.ref 50}}</li>
+                    {{/each}}
+                {{/if}}
+                {{#if object.date}}
+                    <li><strong>Date: </strong>{{truncate object.date 50}}</li>
+                {{/if}}
+                {{#if object.url}}
+                    <li><strong>Url: </strong><a class="vibrant" href="{{object.url}}" target="_blank">{{truncate object.url 50}}</a></li>
+                {{/if}}
             </ul>
         </div>
         <div class="col-md-4 darkMuted">
@@ -21,11 +27,13 @@
             {{/if}}
         </div>
     </div>
-    <div class="row text-center">
-        <div class="col-md-12 credit-line clearfix">
-            <p><em>{{object.footnote}}</em></p>
+    {{#if object.footnote}}
+        <div class="row text-center">
+            <div class="col-md-12 credit-line clearfix">
+                <p><em>{{truncate object.footnote 100}}</em></p>
+            </div>
+            <a href="/" class="btn btn-default text-center">Get Another</a>
         </div>
-        <a href="/" class="btn btn-default text-center">Get Another</a>
-    </div>
+    {{/if}}
 
 </div>
