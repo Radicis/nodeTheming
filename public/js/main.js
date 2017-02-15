@@ -11,24 +11,17 @@ $(document).ready(function(){
         var newvalueY = height * pageY * -2 - 50;
         $('#full-screen').css("top", newvalueY+"px")
         $('#full-screen').css("left", newvalueX+"px");
-        //
-        // var top = $('#homepage-main').css("margin-top");
-        //
-        // console.log(top.slice(0, -2));
-        //
-        // $('#homepage-main').css("margin-top", newvalueY+40 + 100 +"px");
-        // $('#homepage-main').css("margin-left", newvalueY+40 +"px");
     });
 
 });
 
 
 var addCustomField = function(){
-    console.log("adding field");
+    var currentCount = $('.customField').length;
+    console.log("Adding field: " + currentCount);
     var customFields = $('#customFields');
-    var html = '<div class="form-group row">';
-    html += '<div class="col-md-2"><input class="form-control" type="text" /></div>';
-    html += '<div class="col-md-10"><input class="form-control" type="text" /></div></div>';
-
+    var html = '<div class="form-group row customField">';
+    html += '<div class="col-md-2"><input class="form-control" name="field_' + currentCount  + '_label" type="text" /></div>';
+    html += '<div class="col-md-10"><input class="form-control"  name="field_' + currentCount  + '_ref" type="text" /></div></div>';
     customFields.append(html);
 };

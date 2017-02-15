@@ -22,5 +22,6 @@ module.exports.getById = function(id, callback){
 };
 
 module.exports.add = function(field, callback){
+    console.log("Creating new field: " + field.label);
     CustomField.create(field, callback);
 };
