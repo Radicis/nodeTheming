@@ -15,9 +15,7 @@ mongoose.connect(config.database, function(err) {
     console.log('Successfully connected to MongoDB');
 });
 
-
 var app = express();
-
 
 var exhbs = hbs.create({
     helpers: helpers,
@@ -42,7 +40,6 @@ app.set('superSecret', config.secret); // secret variable
 
 // Routes
 app.use('/', require('./routes/index'));
-app.use('/display', require('./routes/display'));
-
+app.use('/config', require('./routes/config'));
 
 module.exports = app;

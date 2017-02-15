@@ -1,20 +1,31 @@
-{{#if page.mainContent.hero}}
-    {{>homepage page.mainContent.hero}}
-{{/if}}
-{{#each page.mainContent.modules}}
+<div id="full-screen" style="background-image: url({{object.bg}});">
 
-    {{#if this.title}}
-        <div class="row clearfix">
-            {{this.title}}
+</div>
+<div id="homepage-main">
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="vibrant">{{truncate object.title 30}}</h1>
+            <ul class="darkMuted">
+                {{#each object.customFields}}
+                    <li><strong>{{this.label}}: </strong>{{this.ref}}</li>
+                {{/each}}
+                <li><strong>Date: </strong>{{object.date}}</li>
+                <li><strong>Url: </strong><a class="vibrant" href="{{object.url}}" target="_blank">{{truncate object.url 50}}</a></li>
+            </ul>
         </div>
-    {{/if}}
-    {{#if this.content}}
-        <div cass="row">
-            {{{this.content}}}
+        <div class="col-md-4 darkMuted">
+            {{#if object.thumbnail}}
+                <a href="{{object.thumbnail}}" data-lightbox="{{object.title}}" data-title="{{object.title}}"><img src="{{object.thumbnail}}" id="thumbnail" /></a>
+            {{else}}
+                <img src="/img/no_image.gif" alt="No image" />
+            {{/if}}
         </div>
-    {{/if}}
-    {{#if this.collection}}
-        {{>list collection=this.collection}}
-    {{/if}}
+    </div>
+    <div class="row text-center">
+        <div class="col-md-12 credit-line clearfix">
+            <p><em>{{object.footnote}}</em></p>
+        </div>
+        <a href="/" class="btn btn-default text-center">Get Another</a>
+    </div>
 
-{{/each}}
+</div>

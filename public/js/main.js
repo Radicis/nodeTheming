@@ -21,3 +21,14 @@ $(document).ready(function(){
     });
 
 });
+
+
+var addCustomField = function(){
+    console.log("adding field");
+    var customFields = $('#customFields');
+    var html = '<div class="form-group row">';
+    html += '<div class="col-md-2"><input class="form-control" type="text" /></div>';
+    html += '<div class="col-md-10"><input class="form-control" type="text" /></div></div>';
+
+    customFields.append(html);
+};

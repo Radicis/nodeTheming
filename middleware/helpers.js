@@ -1,6 +1,8 @@
 var Vibrant = require('node-vibrant');
 var q = require('q');
 var config = require('../config/config');
+var DisplaySchema = require('../models/displaySchema');
+var CustomField = require('../models/customField');
 
 module.exports.getFullSizeImage = function(thumbnailUrl){
     if(thumbnailUrl === null || typeof thumbnailUrl === "undefined") {
@@ -81,5 +83,44 @@ module.exports.getMovieById = function(id){
             defer.resolve(body.data);
         }
     );
+    return defer.promise;
+};
+
+
+module.exports.createDummyData = function(){
+    var defer = q.defer();
+
+    var schema = {
+        Name: "Dummy",
+        brandTitle: "Tate Gallery",
+        brandUrl: "/img/logo.png",
+        collectionName: 'artworks',
+        title: "title",
+        thumbnail: "thumbnailUrl",
+        url: "url",
+        date: "dateText",
+        fullSize: "thumbnailUrl",
+        customFields: [],
+        footnote: "creditLine"
+    };
+
+    var field1 = {
+        ref: "medium",
+        label: "Medium"
+    };
+
+    var field2 = {
+        ref: "all_artists",
+        label: "Artist"
+    };
+
+    DisplaySchema.add(schema, function(err, schema){
+        console.log(schema);
+        DisplaySchema.addCustomField(schema._id, field1, function(err, field){
+            DisplaySchema.addCustomField(schema._id, field2, function(err, field){
+                defer.resolve(field);
+            });
+        });
+    });
     return defer.promise;
 };
