@@ -15,8 +15,6 @@ router.get('/', function(req, res) {
 
     DisplaySchema.getByCollectionName(collection, function(err, displaySchema) {
 
-        console.log(displaySchema);
-
         db.collection(displaySchema.collectionName).findOne(function(error, object) {
             if (err) {
                 throw err;

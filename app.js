@@ -11,9 +11,9 @@ var upload = multer();
 // Connect to MongoDb
 var mongoose = require('mongoose');
 
-mongoose.connect(config.database, function(err) {
-    if (err) console.log("Cannot connect to Db");
-    console.log('Successfully connected to MongoDB');
+mongoose.connect(config.database, function(err, db) {
+    if (err) console.log("Cannot connect to Db:" + err);
+    else console.log('Successfully connected to MongoDB');
 });
 
 var app = express();

@@ -7,12 +7,12 @@ $(document).ready(function(){
     $("body").mousemove(function(e){
         var pageX = e.pageX - (($(window).width()+300) / 2);
         var pageY = e.pageY - ($(window).height() / 2);
-        var newvalueX = width * pageX * -2 - 25;
-        var newvalueY = height * pageY * -2 - 50;
-        $('#full-screen').css("top", newvalueY+"px")
-        $('#full-screen').css("left", newvalueX+"px");
+        var newValueX = width * pageX * -2 - 25;
+        var newValueY = height * pageY * -2 - 50;
+        var fullScreen = $('#full-screen');
+        fullScreen.css("top", newValueY+"px");
+        fullScreen.css("left", newValueX+"px");
     });
-
 });
 
 

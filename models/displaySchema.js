@@ -51,6 +51,10 @@ module.exports.getById = function(id, callback){
         .exec(callback);
 };
 
+module.exports.getFirst = function(callback){
+    return DisplaySchema.find().limit(1).populate('customFields').exec(callback);
+};
+
 module.exports.getByCollectionName = function(collectionName, callback){
     console.log("Getting by collection name: " + collectionName);
     DisplaySchema.findOne({collectionName: collectionName}).populate('customFields').exec(callback);
@@ -59,6 +63,11 @@ module.exports.getByCollectionName = function(collectionName, callback){
 module.exports.add = function(schema, callback){
     console.log('Creating new schema..');
     DisplaySchema.create(schema, callback);
+};
+
+module.exports.update = function(schema, callback){
+    console.log("Updating details id: " + schema._id);
+    DisplaySchema.findOneAndUpdate({_id:schema._id}, {title:schema.title, collectionName: schema.collectionName, url: schema.url, thumbnail: schema.thumbnail, fullSize: schema.fullSize, date: schema.date, customFields:schema.customFields}, { new: false }, callback);
 };
 
 module.exports.addCustomField = function(id, field, callback){
