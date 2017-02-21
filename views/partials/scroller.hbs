@@ -1,0 +1,16 @@
+<div id="full-screen" style="background-image: url({{object.bg}});">
+
+</div>
+<div id="scroller">
+    {{#each objects}}
+        <div class="row">
+            <div class="col-md-3">
+                {{#if this.thumbnail}}
+                    <a href="{{this.thumbnail}}" data-lightbox="{{this.title}}" data-title="{{this.title}}"><img src="{{this.thumbnail}}" class="thumbnail" /></a>
+                {{else}}
+                    <img src="/img/no_image.gif" alt="No image" />
+                {{/if}}
+            </div>
+        </div>
+    {{/each}}
+</div>

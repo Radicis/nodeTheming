@@ -15,27 +15,40 @@ router.get('/', function(req, res) {
 
     DisplaySchema.getByCollectionName(collection, function(err, displaySchema) {
 
-        db.collection(displaySchema.collectionName).findOne(function(error, object) {
+        console.log(displaySchema);
+
+        var collection = db.collection(displaySchema.collectionName);
+        collection.find(function(error, objects) {
+            console.log("Hello");
             if (err) {
                 throw err;
             }
 
-            context.object = {
-                title: object[displaySchema.title],
-                thumbnail: object[displaySchema.thumbnail],
-                url: object[displaySchema.url],
-                date: object[displaySchema.date],
-                customFields: []
-            };
+            context.objects = [];
 
-            displaySchema.customFields.forEach(function (field) {
-                context.object.customFields.push({label: field.label, ref: object[field.ref]});
+            objects.forEach(function(object){
+
+                var fooObject = {
+                    title: object[displaySchema.title],
+                    thumbnail: object[displaySchema.thumbnail],
+                    url: object[displaySchema.url],
+                    date: object[displaySchema.date],
+                    customFields: []
+                };
+
+                displaySchema.customFields.forEach(function (field) {
+                    fooObject.customFields.push({label: field.label, ref: object[field.ref]});
+                });
+
+                fooObject.bg = object[displaySchema['thumbnail']];
+
+                context.objects.push(fooObject);
             });
 
-            context.object.bg = object[displaySchema['thumbnail']];
+            console.log(context.objects);
 
             try {
-                helpers.getImageColours(context.object.thumbnail).then(function (colours) {
+                helpers.getImageColours(context.objects[0].thumbnail).then(function (colours) {
                     context.colours = colours;
                     res.render('default', context);
                 });
@@ -44,6 +57,7 @@ router.get('/', function(req, res) {
                 console.log("Vibrant Crashed!: " + e);
                 res.render('default', context);
             }
+
         });
     });
 });
