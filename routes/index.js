@@ -14,11 +14,10 @@ router.get('/', function(req, res) {
     var context = {};
 
     DisplaySchema.getByCollectionName(collection, function(err, displaySchema) {
-
-        console.log(displaySchema);
-
         var collection = db.collection(displaySchema.collectionName);
-        collection.find(function(error, objects) {
+
+        collection.find({}, {limit:4}).toArray(function(error, objects) {
+
             console.log("Hello");
             if (err) {
                 throw err;
@@ -44,8 +43,6 @@ router.get('/', function(req, res) {
 
                 context.objects.push(fooObject);
             });
-
-            console.log(context.objects);
 
             try {
                 helpers.getImageColours(context.objects[0].thumbnail).then(function (colours) {

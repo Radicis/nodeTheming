@@ -4,9 +4,9 @@
 <div id="scroller">
     {{#each objects}}
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 hovernail imgBox" data-bg="{{this.thumbnail}}">
                 {{#if this.thumbnail}}
-                    <a href="{{this.thumbnail}}" data-lightbox="{{this.title}}" data-title="{{this.title}}"><img src="{{this.thumbnail}}" class="thumbnail" /></a>
+                    <img src="{{this.thumbnail}}" class="thumbnail" />
                 {{else}}
                     <img src="/img/no_image.gif" alt="No image" />
                 {{/if}}

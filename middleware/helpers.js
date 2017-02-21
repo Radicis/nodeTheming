@@ -6,8 +6,9 @@ var CustomField = require('../models/customField');
 
 module.exports.getFullSizeImage = function(thumbnailUrl){
     if(thumbnailUrl === null || typeof thumbnailUrl === "undefined") {
-        return thumbnailUrl.slice(0, -5) + "9.jpg";
+        return "None";
     }
+    return thumbnailUrl.slice(0, -5) + "10.jpg";
 };
 
 module.exports.truncate = function(string, value){
