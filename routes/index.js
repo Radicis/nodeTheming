@@ -2,38 +2,14 @@ var express = require('express');
 var router = express.Router();
 var helpers = require('../middleware/helpers');
 var config = require('../config/config');
-var DisplaySchema = require('../models/displaySchema');
-// Connect to MongoDb
-var mongoose = require('mongoose');
-var db = mongoose.connection;
+var request = require('request');
 
 router.get('/', function(req, res) {
 
-    var collection = config.collectionName;
-
-    var context = {};
-
-    DisplaySchema.getByCollectionName(collection, function(err, displaySchema) {
-
-        db.collection(displaySchema.collectionName).findOne(function(error, object) {
-            if (err) {
-                throw err;
-            }
-
-            context.object = {
-                title: object[displaySchema.title],
-                thumbnail: object[displaySchema.thumbnail],
-                url: object[displaySchema.url],
-                date: object[displaySchema.date],
-                customFields: []
-            };
-
-            displaySchema.customFields.forEach(function (field) {
-                context.object.customFields.push({label: field.label, ref: object[field.ref]});
-            });
-
-            context.object.bg = object[displaySchema['thumbnail']];
-
+    request('http://localhost:3030/object/random', function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var context = {};
+            context.object = JSON.parse(body);
             try {
                 helpers.getImageColours(context.object.thumbnail).then(function (colours) {
                     context.colours = colours;
@@ -44,7 +20,7 @@ router.get('/', function(req, res) {
                 console.log("Vibrant Crashed!: " + e);
                 res.render('default', context);
             }
-        });
+        }
     });
 });
 

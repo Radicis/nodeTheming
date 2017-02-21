@@ -42,6 +42,7 @@ app.set('superSecret', config.secret); // secret variable
 
 // Routes
 app.use('/', require('./routes/index'));
+app.use('/object', require('./routes/object'));
 app.use('/config', require('./routes/config'));
 
 module.exports = app;
