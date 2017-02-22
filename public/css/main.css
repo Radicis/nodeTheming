@@ -1,5 +1,5 @@
 html {
-    color: #333;
+    color: #fefefe;
     font-size: 1em;
 
 }
@@ -8,6 +8,8 @@ html, body {
     min-height: 100%;
     font-family: 'Roboto', sans-serif;
     background-color:#222;
+    overflow:auto;
+
 }
 
 a{
@@ -28,6 +30,19 @@ a{
 
 .hovernail{
     z-index: 2;
+}
+
+.hovernail img{
+    max-width:100%;
+}
+
+.hovernails{
+    position:fixed;
+    width:280px;
+}
+
+.full-size{
+    margin-left:250px;
 }
 
 /* ==========================================================================
@@ -77,23 +92,8 @@ a{
    Full Screen Homepage
    ========================================================================== */
 
-#full-screen{
-    -webkit-background-size: cover !important;
-    -moz-background-size: cover !important;
-    -o-background-size: cover!important;
-    background-size: cover !important;
-    min-height: 100%;
-    min-width: 100%;
-    width: 100%;
-    height: auto;
-    position: fixed;
-    top: 50px;
-    left: 0px;
-    /*-webkit-filter: blur(10px);*/
-    /*-moz-filter: blur(10px);*/
-    /*-o-filter: blur(10px);*/
-    /*-ms-filter: blur(10px);*/
-    /*filter: blur(10px);*/
+#full-size{
+    /*width:100%;*/
     z-index:1;
 }
 
@@ -130,6 +130,29 @@ a{
 }
 
 
+.hovernails{
+    overflow:auto;
+}
+
+.hovernails ul{
+    list-style:none;
+}
+
+.hovernails ul li{
+    margin-bottom:20px;
+}
+
+.hovernails ul li img{
+    border:1px solid #fefefe;
+}
+
+.hovernails ul li img:hover{
+    -webkit-box-shadow: 1px 1px 1px 0px rgba(171,234,252,1);
+    -moz-box-shadow: 1px 1px 1px 0px rgba(171,234,252,1);
+    box-shadow: 1px 1px 1px 0px rgba(171,234,252,1);
+}
+
+
 /* ==========================================================================
    Footer
    ========================================================================== */
@@ -154,6 +177,10 @@ footer p a:hover{
 
 .copyright{
     text-align:center;
+}
+
+.thumbnails{
+    border-right:2px solid #fefefe;
 }
 
 /* ==========================================================================

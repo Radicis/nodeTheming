@@ -6,7 +6,7 @@ var request = require('request');
 
 router.get('/', function(req, res) {
 
-    request('http://localhost:3030/object/0', function (error, response, body) {
+    request('http://localhost:3030/object/900', function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var context = {};
             context.objects = JSON.parse(body);

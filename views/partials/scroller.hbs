@@ -1,16 +1,19 @@
-<div id="full-screen" style="background-image: url({{object.bg}});">
-
-</div>
 <div id="scroller">
-    {{#each objects}}
-        <div class="row">
-            <div class="col-md-3 hovernail imgBox" data-bg="{{this.thumbnail}}">
-                {{#if this.thumbnail}}
-                    <img src="{{this.thumbnail}}" class="thumbnail" />
-                {{else}}
-                    <img src="/img/no_image.gif" alt="No image" />
-                {{/if}}
-            </div>
+    <div class="row">
+        <div class="col-md-3 hovernails">
+            <ul>
+                {{#each objects}}
+                    <li class="hovernail" data-bg="{{this.thumbnail}}">
+                        {{#if this.thumbnail}}
+                            <img src="{{this.thumbnail}}" class="hovernail-img" />
+                        {{else}}
+                            <img src="/img/no_image.gif" alt="No image" />
+                        {{/if}}
+                    </li>
+                {{/each}}
+            </ul>
         </div>
-    {{/each}}
+        <div class="col-md-9 full-size" id="full-size">
+        </div>
+    </div>
 </div>
