@@ -28,6 +28,10 @@ a{
     border-bottom:1px solid #999;
 }
 
+.scroller{
+    overflow:hidden;
+}
+
 .hovernail{
     z-index: 2;
 }
@@ -95,6 +99,8 @@ a{
 #full-size{
     /*width:100%;*/
     z-index:1;
+    height:100%;
+    width:100%;
 }
 
 #homepage-main{
