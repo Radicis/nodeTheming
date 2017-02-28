@@ -7,7 +7,7 @@ html {
 html, body {
     min-height: 100%;
     font-family: 'Roboto', sans-serif;
-    background-color:#222;
+    background-color:#fefefe;
     overflow:auto;
 
 }
@@ -40,14 +40,6 @@ a{
     max-width:100%;
 }
 
-.hovernails{
-    position:fixed;
-    width:280px;
-}
-
-.full-size{
-    margin-left:250px;
-}
 
 /* ==========================================================================
    Navigation
