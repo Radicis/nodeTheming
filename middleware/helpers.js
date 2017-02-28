@@ -4,6 +4,14 @@ var config = require('../config/config');
 var DisplaySchema = require('../models/displaySchema');
 var CustomField = require('../models/customField');
 
+module.exports.getKeys = function(obj){
+    var keys = [];
+    for(var key in obj){
+        keys.push(key);
+    }
+    return keys;
+};
+
 module.exports.getFullSizeImage = function(thumbnailUrl){
     if(thumbnailUrl === null || typeof thumbnailUrl === "undefined") {
         return "None";

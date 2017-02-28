@@ -10,38 +10,17 @@
     <link rel="stylesheet" href="/css/vendor/normalize.min.css">
     <link rel="stylesheet" href="/css/vendor/lightbox.min.css">
     <link rel="stylesheet" href="/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/vendor/slide.css">
     <link rel="stylesheet" href="/css/main.css">
-
-    <style>
-        .vibrant{
-            color:{{colours.vibrant}} !important;
-        }
-        .darkMuted{
-            color:{{colours.darkMuted}} !important;
-        }
-        a.darkMuted:hover{
-            color:{{colours.vibrant}} !important;
-        }
-        .lightMuted{
-            background-color:{{colours.lightMuted}} !important;
-        }
-    </style>
 </head>
 <body>
 
-
 {{{body}}}
 
-{{#if footer}}
-    {{>footer}}
-{{/if}}
-
-
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+<script src="/js/vendor/jquery-2.1.1.js"></script>
 <script src="/js/vendor/lightbox.min.js"></script>
 <script src="/js/vendor/bootstrap.min.js"></script>
+<script src="/js/vendor/mixitup.min.js"></script>
 <!--&lt;!&ndash;<script src="/js/vendor/imgZoom/jquery.imgzoom.js"></script>&ndash;&gt;-->
 <!--<script src="/js/zoom/zoom.js"></script>-->
 <script src="/js/main.js"></script>

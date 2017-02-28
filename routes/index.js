@@ -6,20 +6,14 @@ var request = require('request');
 
 router.get('/', function(req, res) {
 
-    request('http://localhost:3030/object/900', function (error, response, body) {
+    request('http://localhost:3030/object/1700', function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var context = {};
             context.objects = JSON.parse(body);
-            try {
-                helpers.getImageColours(context.object[0].thumbnail).then(function (colours) {
-                    context.colours = colours;
-                    res.render('default', context);
-                });
-            }
-            catch (e) {
-                console.log("Vibrant Crashed!: " + e);
-                res.render('default', context);
-            }
+
+            context.properties = helpers.getKeys(context.objects[0]);
+
+            res.render('default', context);
         }
     });
 });

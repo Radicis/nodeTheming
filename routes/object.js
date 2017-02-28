@@ -66,6 +66,7 @@ router.get('/:count', function(req, res) {
             dbObjects.forEach(function(dbObject){
 
                 var object = {
+                    _id: dbObject._id,
                     title: dbObject[displaySchema.title],
                     thumbnail: dbObject[displaySchema.thumbnail],
                     url: dbObject[displaySchema.url],
