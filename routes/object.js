@@ -56,7 +56,7 @@ router.get('/:count', function(req, res) {
         var count = parseInt(req.params.count);
 
         var collection = db.collection(displaySchema.collectionName);
-        collection.find({}, {limit:5}).skip(count).toArray(function(error, dbObjects) {
+        collection.find({thumbnail: {$ne: ""}}, {limit:20}).skip(count).toArray(function(error, dbObjects) {
             if (err) {
                 throw err;
             }

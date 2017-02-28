@@ -1,17 +1,22 @@
 <div id="scroller">
     <div class="row">
-        <div class="col-md-3 hovernails">
-            <ul>
+        <div class="col-md-3">
+            <div class="row">
+                <h1>Tate Gallery</h1>
+                <p>Some art n stuff</p>
+            </div>
+            <div class="row hovernails">
+
                 {{#each objects}}
-                    <li class="hovernail" data-bg="{{this.thumbnail}}">
-                        {{#if this.thumbnail}}
-                            <img src="{{this.thumbnail}}" class="hovernail-img" />
-                        {{else}}
-                            <img src="/img/no_image.gif" alt="No image" />
-                        {{/if}}
-                    </li>
+                    {{#if this.thumbnail}}
+                    <img src="{{this.thumbnail}}" class="hovernail-img" data-bg="{{this.thumbnail}}" />
+                    {{else}}
+                                <img src="/img/no_image.gif" alt="No image" />
+                    {{/if}}
+
                 {{/each}}
-            </ul>
+
+            </div>
         </div>
         <div class="col-md-6 full-size" id="full-size">
 

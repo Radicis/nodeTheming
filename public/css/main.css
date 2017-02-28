@@ -18,10 +18,6 @@ a{
 }
 
 
-.content{
-    min-height:400px;
-    margin-top:100px;
-}
 
 .navbar{
     background-color:#fefefe;
@@ -32,94 +28,9 @@ a{
     overflow:hidden;
 }
 
-.hovernail{
-    z-index: 2;
-}
-
-.hovernail img{
-    max-width:100%;
-}
-
-
-/* ==========================================================================
-   Navigation
-   ========================================================================== */
-
-.navbar{
-    padding:10px;
-}
-
-.navbar-nav{
-    float:right;
-}
-
-.navbar img{
-    max-height:50px;
-    margin-top:-15px;
-}
-
-.navbar ul {
-    overflow: auto;
-    list-style-type: none;
-    margin:0;
-}
-
-.navbar ul li {
-    border-left: 1px solid #aaa;
-}
-
-.navbar ul li:last-child {
-    border-right: none;
-}
-
-.navbar ul li a {
-    text-decoration: none;
-    color: #ccc;
-    text-transform: uppercase;
-    -webkit-transition: all 0.5s ease;
-}
-
-.navbar ul li a:hover {
-    color: #666;
-}
-
-
 /* ==========================================================================
    Full Screen Homepage
    ========================================================================== */
-
-#full-size{
-    /*width:100%;*/
-    z-index:1;
-    height:100%;
-    width:100%;
-}
-
-#homepage-main{
-    background-color:rgba(255,255,255,0.80);
-    margin-top:100px;
-    border: 1px solid #999;
-    min-height:300px;
-    width:100%;
-}
-
-#homepage-main > div{
-    padding:30px;
-}
-
-#homepage-main img{
-    border:1px solid #222;
-    max-width:250px;
-    max-height:250px;
-}
-
-#homepage-main h1{
-    text-shadow: 1px 1px 1px rgba(150, 150, 150, 0.8);
-}
-
-#homepage-main ul{
-    list-style-type: square;
-}
 
 
 .credit-line {
@@ -127,27 +38,36 @@ a{
     color: #555;
 }
 
+.hovernails {
+    /* Prevent vertical gaps */
+    line-height: 0;
 
-.hovernails{
-    overflow:auto;
+    -webkit-column-count: 3;
+    -webkit-column-gap:   0;
+    -moz-column-count:    3;
+    -moz-column-gap:      0;
+    column-count:         3;
+    column-gap:           0;
 }
 
-.hovernails ul{
-    list-style:none;
+.hovernails img {
+    /* Just in case there are inline attributes */
+    width: 100% !important;
+    height: auto !important;
+    max-width:100px;
+    max-height:100px;
 }
 
-.hovernails ul li{
-    margin-bottom:20px;
+.hovernails img:hover{
+    -webkit-box-shadow: 1px 1px 1px 0 rgba(171,234,252,1);
+    -moz-box-shadow: 1px 1px 1px 0 rgba(171,234,252,1);
+    box-shadow: 1px 1px 1px 0 rgba(171,234,252,1);
+    padding:5px;
 }
 
-.hovernails ul li img{
-    border:1px solid #fefefe;
-}
-
-.hovernails ul li img:hover{
-    -webkit-box-shadow: 1px 1px 1px 0px rgba(171,234,252,1);
-    -moz-box-shadow: 1px 1px 1px 0px rgba(171,234,252,1);
-    box-shadow: 1px 1px 1px 0px rgba(171,234,252,1);
+#full-size img{
+    max-width:100vw;
+    max-height:100vh;
 }
 
 

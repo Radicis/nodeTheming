@@ -11,30 +11,6 @@ $(document).ready(function(){
         }
     });
 
-
-    // $("body").mousemove(function(e){
-    //     var mouseX = e.pageX - $(window).scrollTop();
-    //     var mouseY = e.pageY - $(window).scrollLeft();
-    //
-    //     var fullScreen = $('#full-screen');
-    //
-    //     var newValueX = mouseX*1.5 - parseInt(fullScreen.css('width'))/4;
-    //     var newValueY = mouseY*1.5 - parseInt(fullScreen.css('height'))/4;
-    //
-    //    // console.log("moving to: " + newValueX + " with width: " + fullScreen.css('width') + " and " + fullScreen.width());
-    //
-    //     if(newValueX >= fullScreen.css('width')){
-    //         newValueX = fullScreen.css('width');
-    //     }
-    //
-    //     if(newValueY >= fullScreen.css('height')){
-    //         newValueY = fullScreen.css('height');
-    //     }
-    //
-    //
-    //     fullScreen.css("top", -newValueY + "px");
-    //     fullScreen.css("left", -newValueX + "px");
-    // });
     bindThumbnailEvent();
 });
 
@@ -51,7 +27,7 @@ var addCustomField = function(){
 
 
 var bindThumbnailEvent = function(){
-    var thumbnails = $('.hovernail');
+    var thumbnails = $('.hovernails img');
     var fullscreen = $('#full-size');
     thumbnails.click(function(){
         _this = this;
@@ -59,7 +35,6 @@ var bindThumbnailEvent = function(){
         var src = $(_this).data('bg').slice(0, -5) + "10.jpg";
 
         $('<img src="'+ src +'">').load(function() {
-            this.width = this.width-225;
             var _imgsrc = this;
             fullscreen
                 .fadeOut(200, function() {
