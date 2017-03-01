@@ -53,13 +53,15 @@ router.post('/', function(req, res) {
         }
 
         var count= parseInt(req.body.count);
-
-        console.log("COUNT IS: " + count);
-
+        var skip = parseInt(req.body.skip);
         var search = req.body.search;
 
+        console.log("Skipping:" + skip);
+
+        console.log("Finding: " + search);
+
         var collection = db.collection(displaySchema.collectionName);
-        collection.find( { $and: [ { thumbnailUrl: { $ne: null } }, {$or: [{ title: { "$regex": search, "$options": "i" }  }]} ] }, {limit:count}).skip(count).toArray(function(error, dbObjects) {
+        collection.find( { $and: [ { thumbnailUrl: { $ne: null } }, {$or: [{ title: { "$regex": search, "$options": "i" }  }]} ] }, {limit:count}).skip(skip).toArray(function(error, dbObjects) {
             if (err) {
                 throw err;
             }

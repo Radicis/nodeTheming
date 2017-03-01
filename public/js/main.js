@@ -1,19 +1,18 @@
-var count = 72;
-
+var count = 24;
+var searchString = "";
 
 $(document).ready(function(){
 
     $('#load-more').click(function(){
-        loadMore(10);
+        loadMore();
     });
 
     CreateMix(0);
 });
 
 
-var loadMore = function(plusCount){
-    count+=plusCount;
-    doneTyping();
+var loadMore = function(){
+    AppendMix();
 };
 
 //setup before functions
@@ -33,53 +32,98 @@ $input.on('keydown', function () {
 });
 
 var doneTyping = function(){
-    var searchString = $('#search').val();
-    CreateMix(searchString);
+    searchString = $('#search').val();
+    console.log("Searching for: " + searchString);
+    CreateMix();
 };
 
 
-var CreateMix = function(searchString){
+
+
+var CreateMix = function(){
 
     var params = {
-        count: count,
-        search: searchString
+        count: 24,
+        search: searchString,
+        skip: 0
     };
-
 
     $.post("http://localhost:3030/object", params, function(data) {
 
-        console.log(data);
+        try{
+            $("div.mix").remove();
+            var collage = $('#collage');
+            collage.mixItUp('destroy');
+        }
+        catch(err){}
 
         var container = document.querySelector('[data-ref="container"]');
-        var firstGap = document.querySelector('[data-ref="first-gap"]');
+
+        data.forEach(function(item){
+            var html = '<div class="mix ' +
+                item.color + '" data-ref="item"><img src="' +
+                item.thumbnail + '" data-bg="'+ item.thumbnail +
+                '" data-title="' + item.title + '" /></div>';
+            $('#collage').append(html);
+        });
 
         var mixer = mixitup(container, {
-            selectors: {
-                target: '[data-ref="item"]' // Query targets with an attribute selector to keep our JS and styling classes seperate
-            },
-            layout: {
-                siblingAfter: firstGap // Ensure the first "gap" element is known to mixitup incase of insertion into an empty container
-            },
-            data: {
-                uidKey: '_id' // Our data model must have a unique id. In this case, its key is 'id'
-            },
-            render: { // We must provide a target render function incase we need to render new items not in the initial dataset (not used in this demo)
-                target: function (item) {
-                    return '<div class="box mix ' +
-                        item.color + '" data-ref="item"><img src="' +
-                        item.thumbnail + '" data-bg="'+ item.thumbnail +
-                        '" data-title="' + item.title  + '" /></div>';
-                }
+            animation: {
+                animateResizeContainer: false,
+                effects: 'fade rotateX(-45deg) translateY(-10%)'
             }
         });
 
-        mixer.dataset(data)
-            .then(function (state) {
-                console.log('loaded ' + state.activeDataset.length + ' items');
-            });
+        if(data.length==0){
+            ('.hovernails').html("<h2>Nothing found</h2>")
+        }
+        else{
+            count += data.length;
+        }
+
+        bindThumbnailEvent();
+
+    });
+};
+
+
+var AppendMix = function(){
+
+    var params = {
+        count: count,
+        search: searchString,
+        skip: count
+    };
+
+    $.post("http://localhost:3030/object", params, function(data) {
+
+        try{
+            $('#collage').mixItUp('destroy');
+        }
+        catch(err){}
+
+        var container = document.querySelector('[data-ref="container"]');
+
+        data.forEach(function(item){
+            var html = '<div class="mix ' +
+                item.color + '" data-ref="item"><img src="' +
+                item.thumbnail + '" data-bg="'+ item.thumbnail +
+                '" data-title="' + item.title + '" /></div>';
+            $('#collage').append(html);
+        });
+
+        var mixer = mixitup(container, {
+            animation: {
+                animateResizeContainer: false,
+                effects: 'fade rotateX(-45deg) translateY(-10%)'
+            }
+        });
 
         if(data.length==0){
             ('.hovernails').html("<h2>Nothing found</h2>")
+        }
+        else{
+            count += data.length;
         }
 
         bindThumbnailEvent();
@@ -100,7 +144,7 @@ var addCustomField = function(){
 };
 
 var bindThumbnailEvent = function(){
-    var thumbnails = $('.hovernails img');
+    var thumbnails = $('.mix img');
     var details = $('#details');
     var fullscreen = $('#full-size');
     thumbnails.click(function(){
