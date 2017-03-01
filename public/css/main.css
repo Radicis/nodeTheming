@@ -66,6 +66,21 @@ a{
     column-count:         9;
     column-gap:           0;
     overflow:visible;
+    margin-top:180px;
+}
+
+.header{
+    position:fixed;
+    z-index:999999;
+    width:100vw;
+    text-align: center;
+    background-color:rgba(20,20,20,0.7);
+    padding-bottom:20px;
+}
+
+.header .form-control{
+    max-width:500px;
+    margin:auto;
 }
 
 img{

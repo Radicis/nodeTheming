@@ -1,26 +1,27 @@
-<div class="container">
-    <div class="col-md-12 text-center">
-        <div class="row header">
+<div class="header">
+    <div class="row">
+        <div class="col-md-12">
             <h1>Tate Gallery</h1>
             <span class="sub-heading">Advanced Search</span>
+            <div class="row filter">
+                <input class="form-control" type="text" id="search" placeholder="Search.." />
+                    <!--{{#each properties}}-->
+                <!--<p>Hello: {{this}}</p>-->
+                    <!--{{/each}}-->
+                <button type="button" data-sort="order:asc">Ascending</button>
+                <button type="button" data-sort="order:descending">Descending</button>
+                <button type="button" data-sort="random">Random</button>
+            </div>
         </div>
-        <div class="row filter">
 
-            <input class="form-control" type="text" id="search" placeholder="Search.." />
-                <!--{{#each properties}}-->
-            <!--<p>Hello: {{this}}</p>-->
-                <!--{{/each}}-->
-            <button type="button" data-sort="order:asc">Ascending</button>
-            <button type="button" data-sort="order:descending">Descending</button>
-            <button type="button" data-sort="random">Random</button>
+    </div>
+</div>
 
-        </div>
-        <br>
+<div class="container">
+    <div class="col-md-12 text-center">
         <div class="container" data-ref="container" id="collage">
 
         </div>
-
-        <button type="button" class="btn btn-default clearfix" id="load-more">More..</button>
     </div>
 </div>
 

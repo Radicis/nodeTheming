@@ -1,4 +1,4 @@
-var count = 24;
+var count = 60;
 var searchString = "";
 
 $(document).ready(function(){
@@ -11,9 +11,12 @@ $(document).ready(function(){
 });
 
 
-var loadMore = function(){
-    AppendMix();
-};
+$(window).scroll(function() {
+    console.log("Scrolling..");
+    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+        AppendMix();
+    }
+});
 
 //setup before functions
 var typingTimer;                //timer identifier
@@ -43,7 +46,7 @@ var doneTyping = function(){
 var CreateMix = function(){
 
     var params = {
-        count: 24,
+        count: 60,
         search: searchString,
         skip: 0
     };
