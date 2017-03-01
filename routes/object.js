@@ -45,48 +45,60 @@ router.get('/random', function(req, res) {
     });
 });
 
-router.get('/:count', function(req, res) {
-
+router.post('/', function(req, res) {
 
     DisplaySchema.getByCollectionName(config.collectionName, function(err, displaySchema) {
         if (err) {
             throw err;
         }
 
-        var count = parseInt(req.params.count);
+        var count= parseInt(req.body.count);
+
+        console.log("COUNT IS: " + count);
+
+        var search = req.body.search;
 
         var collection = db.collection(displaySchema.collectionName);
-        collection.find({thumbnail: {$ne: ""}}, {limit:20}).skip(count).toArray(function(error, dbObjects) {
+        collection.find( { $and: [ { thumbnailUrl: { $ne: null } }, {$or: [{ title: { "$regex": search, "$options": "i" }  }]} ] }, {limit:count}).skip(count).toArray(function(error, dbObjects) {
             if (err) {
                 throw err;
             }
 
-            var objects = [];
+            try{
+                var objects = [];
 
-            dbObjects.forEach(function(dbObject){
+                dbObjects.forEach(function(dbObject){
 
-                var object = {
-                    _id: dbObject._id,
-                    title: dbObject[displaySchema.title],
-                    thumbnail: dbObject[displaySchema.thumbnail],
-                    url: dbObject[displaySchema.url],
-                    date: dbObject[displaySchema.date],
-                    customFields: []
-                };
+                    var object = {
+                        _id: dbObject._id,
+                        title: dbObject[displaySchema.title],
+                        thumbnail: dbObject[displaySchema.thumbnail],
+                        url: dbObject[displaySchema.url],
+                        date: dbObject[displaySchema.date],
+                        customFields: []
+                    };
 
-                displaySchema.customFields.forEach(function (field) {
-                    object.customFields.push({label: field.label, ref: dbObject[field.ref]});
+                    displaySchema.customFields.forEach(function (field) {
+                        object.customFields.push({label: field.label, ref: dbObject[field.ref]});
+                    });
+
+                    object.bg = dbObject[displaySchema['thumbnail']];
+
+                    objects.push(object)
                 });
 
-                object.bg = dbObject[displaySchema['thumbnail']];
+                console.log("Objects is: " + objects.length);
 
-                objects.push(object)
-            });
-
-            res.json(objects);
+                res.json(objects);
+            }
+            catch(err){
+                res.json({});
+            }
         });
     });
 });
+
+
 
 router.get('/setup', function(err, data){
     helpers.createDummyData().then(function(field){

@@ -1,32 +1,31 @@
+<div class="container">
+    <div class="col-md-12 text-center">
+        <div class="row header">
+            <h1>Tate Gallery</h1>
+            <span class="sub-heading">Advanced Search</span>
+        </div>
+        <div class="row filter">
 
-<div class="col-md-3 text-center" id="menu">
-    <div class="row header">
-        <h1>Tate Gallery</h1>
-        <span class="sub-heading">Advanced Search</span>
-    </div>
-    <div class="row filter">
-        <form>
-            <input class="form-control" type="text" placeholder="Search.." />
-            {{#each properties}}
-                <p>Hello: {{this}}</p>
-            {{/each}}
-            <button type="button" data-sort="order:asc">Ascending</button>
-            <button type="button" data-sort="order:descending">Descending</button>
-            <button type="button" data-sort="random">Random</button>
-        </form>
-    </div>
-    <br>
-    <div class="container" data-ref="container">
-        <div class="gap" data-ref="first-gap"></div>
-        <div class="gap"></div>
-        <div class="gap"></div>
-    </div>
+            <input class="form-control" type="text" id="search" placeholder="Search.." />
+                <!--{{#each properties}}-->
+            <!--<p>Hello: {{this}}</p>-->
+                <!--{{/each}}-->
+            <!--<button type="button" data-sort="order:asc">Ascending</button>-->
+            <!--<button type="button" data-sort="order:descending">Descending</button>-->
+            <!--<button type="button" data-sort="random">Random</button>-->
 
-    <button type="button" class="btn btn-default clearfix" id="load-more">More..</button>
+        </div>
+        <br>
+        <div class="container hovernails" data-ref="container">
+            <div class="gap" data-ref="first-gap"></div>
+            <div class="gap"></div>
+            <div class="gap"></div>
+        </div>
+
+        <!--<button type="button" class="btn btn-default clearfix" id="load-more">More..</button>-->
+    </div>
 </div>
 
-<div class="col-md-9 full-size" id="full-size">
+<div id="full-size">
 
 </div>
-
-
