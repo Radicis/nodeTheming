@@ -1,6 +1,4 @@
-# nodeTheming
-
-Node Data Set Theming
+# Node Data Set Theming
 =====================
 
 Node theming assignment for Advanced Web Publishing module
