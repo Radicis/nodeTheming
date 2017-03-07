@@ -1,48 +1,28 @@
-<div class="header">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Tate Gallery</h1>
-            <span class="sub-heading">Advanced Search</span>
-            <div class="row filter">
-                <input class="form-control" type="text" id="search" placeholder="Search.." />
-                    <!--{{#each properties}}-->
-                <!--<p>Hello: {{this}}</p>-->
-                    <!--{{/each}}-->
-                <button type="button" data-sort="order:asc">Ascending</button>
-                <button type="button" data-sort="order:descending">Descending</button>
-                <button type="button" data-sort="random">Random</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
 <div class="container">
     <div class="col-md-12 text-center">
         <div id="controls">
-            <div class="header">
                 <h1>Tate Gallery</h1>
-                <span class="sub-heading">Advanced Search</span>
-            </div>
+                <span class="sub-heading">- Fluffy Search -</span>
+
             <div class="filter">
-
                 <input class="form-control" type="text" id="search" placeholder="Search.." />
-                    <!--{{#each properties}}-->
-                <!--<p>Hello: {{this}}</p>-->
-                    <!--{{/each}}-->
-                <button type="button" data-sort="order:asc">Ascending</button>
-                <button type="button" data-sort="order:descending">Descending</button>
-                <button type="button" data-sort="random">Random</button>
-
+                <div class="form-group badge-checkboxes">
+                    {{#each properties}}
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"  value="{{this}}" checked>
+                                <span class="badge text-capitalize">{{this}}</span>
+                            </label>
+                        </div>
+                    {{/each}}
+                </div>
+                <button type="button" class="btn btn-xs" data-sort="random">Randomize</button>
             </div>
         </div>
         <br>
         <div class="container" data-ref="container" id="collage">
 
         </div>
+        <button type="button" class="btn btn-default clearfix" id="load-more">More..</button>
     </div>
-</div>
-
-<div id="full-size">
-
 </div>

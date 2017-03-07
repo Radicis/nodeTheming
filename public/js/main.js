@@ -1,24 +1,19 @@
-var count = 60;
+var count = 24;
 var searchString = "";
 
 $(document).ready(function(){
 
     $(window).scroll(function () {
-        //if you hard code, then use console
-        //.log to determine when you want the
-        //nav bar to stick.
-        console.log($(window).scrollTop())
-        if ($(window).scrollTop() > 180) {
+        if ($(window).scrollTop() > 100) {
             $('#controls').addClass('fixed');
         }
-        if ($(window).scrollTop() < 181) {
+        if ($(window).scrollTop() < 105 && $('#controls').hasClass('fixed')) {
             $('#controls').removeClass('fixed');
         }
     });
 
-
     $('#load-more').click(function(){
-        loadMore();
+        AppendMix();
     });
 
     CreateMix(0);
@@ -54,13 +49,10 @@ var doneTyping = function(){
     CreateMix();
 };
 
-
-
-
 var CreateMix = function(){
 
     var params = {
-        count: 60,
+        count: 24,
         search: searchString,
         skip: 0
     };

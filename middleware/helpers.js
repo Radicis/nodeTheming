@@ -7,6 +7,7 @@ var CustomField = require('../models/customField');
 module.exports.getKeys = function(obj){
     var keys = [];
     for(var key in obj){
+        console.log(key);
         keys.push(key);
     }
     return keys;
@@ -72,26 +73,6 @@ module.exports.getImageColours = function(url){
         defer.resolve(colours);
     });
 
-    return defer.promise;
-};
-
-module.exports.searchIMDBTitles = function(term){
-    var defer = q.defer();
-    var request = require('request');
-    request.post("http://imdb.wemakesites.net/api/search?q=" + term + "&api_key=" + config.imdb_key, {json:true}, function(err, res, body){
-            defer.resolve(body.data.results.titles);
-        }
-    );
-    return defer.promise;
-};
-
-module.exports.getMovieById = function(id){
-    var defer = q.defer();
-    var request = require('request');
-    request.post("http://imdb.wemakesites.net/api/" + id + "?api_key=" + config.imdb_key, {json:true}, function(err, res, body){
-            defer.resolve(body.data);
-        }
-    );
     return defer.promise;
 };
 

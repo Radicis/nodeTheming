@@ -56,8 +56,6 @@ router.post('/', function(req, res) {
         var skip = parseInt(req.body.skip);
         var search = req.body.search;
 
-        console.log("Skipping:" + skip);
-
         console.log("Finding: " + search);
 
         var collection = db.collection(displaySchema.collectionName);

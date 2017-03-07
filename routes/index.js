@@ -6,16 +6,19 @@ var request = require('request');
 
 router.get('/', function(req, res) {
 
-    // request('http://localhost:3030/object/', function (error, response, body) {
-    //     if (!error && response.statusCode == 200) {
-    //         var context = {};
-    //         context.objects = JSON.parse(body);
-    //
-    //         context.properties = helpers.getKeys(context.objects[0]);
+    request('http://localhost:3030/object/random', function (error, response, body) {
+         if (!error && response.statusCode == 200) {
+             var context = {};
 
-            res.render('default', {});
-    //     }
-    // });
+             var object = JSON.parse(body);
+
+             context.properties = helpers.getKeys(object);
+
+             console.log(context.properties);
+
+            res.render('default', context);
+         }
+    });
 });
 
 router.get('/setup', function(err, data){
