@@ -3,6 +3,20 @@ var searchString = "";
 
 $(document).ready(function(){
 
+    $(window).scroll(function () {
+        //if you hard code, then use console
+        //.log to determine when you want the
+        //nav bar to stick.
+        console.log($(window).scrollTop())
+        if ($(window).scrollTop() > 180) {
+            $('#controls').addClass('fixed');
+        }
+        if ($(window).scrollTop() < 181) {
+            $('#controls').removeClass('fixed');
+        }
+    });
+
+
     $('#load-more').click(function(){
         loadMore();
     });
@@ -48,42 +62,10 @@ var CreateMix = function(){
         skip: 0
     };
 
-    $.post("http://localhost:3030/object", params, function(data) {
+    // Clear existing items
+    $('#collage').html("");
 
-        try{
-            $("div.mix").remove();
-            var collage = $('#collage');
-            collage.mixItUp('destroy');
-        }
-        catch(err){}
-
-        var container = document.querySelector('[data-ref="container"]');
-
-        data.forEach(function(item){
-            var html = '<div class="mix ' +
-                item.color + '" data-ref="item"><img src="' +
-                item.thumbnail + '" data-bg="'+ item.thumbnail +
-                '" data-title="' + item.title + '" /></div>';
-            $('#collage').append(html);
-        });
-
-        var mixer = mixitup(container, {
-            animation: {
-                animateResizeContainer: false,
-                effects: 'fade rotateX(-45deg) translateY(-10%)'
-            }
-        });
-
-        if(data.length==0){
-            ('.hovernails').html("<h2>Nothing found</h2>")
-        }
-        else{
-            count += data.length;
-        }
-
-        bindThumbnailEvent();
-
-    });
+    Populate(params);
 };
 
 
@@ -95,83 +77,54 @@ var AppendMix = function(){
         skip: count
     };
 
+    Populate(params);
+
+
+};
+
+var Populate = function(params){
     $.post("http://localhost:3030/object", params, function(data) {
 
+        var collage = $('#collage');
+
+        // Destroy existing mixitup instance if exists
         try{
-            $('#collage').mixItUp('destroy');
+            collage.mixItUp('destroy');
         }
         catch(err){}
 
         var container = document.querySelector('[data-ref="container"]');
 
         data.forEach(function(item){
-            var html = '<div class="mix ' +
-                item.color + '" data-ref="item"><img src="' +
+            var html = '<a class="mix ' + item.color + '" data-ref="item"  data-lightbox="'+ item._id + '"' +
+                ' href="' +  item.thumbnail.slice(0, -5) + "10.jpg" + '"><img src="' +
                 item.thumbnail + '" data-bg="'+ item.thumbnail +
-                '" data-title="' + item.title + '" /></div>';
-            $('#collage').append(html);
+                '" data-title="' + item.title + '"/></a>';
+            collage.append(html);
         });
 
-        var mixer = mixitup(container, {
+        mixitup(container, {
             animation: {
                 animateResizeContainer: false,
                 effects: 'fade rotateX(-45deg) translateY(-10%)'
             }
         });
 
+        var loadMore = $('#load-more');
+
+        // If there are no objects returned then remove the more button
         if(data.length==0){
-            ('.hovernails').html("<h2>Nothing found</h2>")
+            loadMore.fadeOut();
+        }
+
+        if($('#collage > a').length == 0){
+            collage.html("<div>Nothing found</div>")
+            loadMore.fadeOut();
         }
         else{
             count += data.length;
+            loadMore.fadeIn();
         }
-
-        bindThumbnailEvent();
-
     });
-
-
-};
-
-var addCustomField = function(){
-    var currentCount = $('.customField').length;
-    console.log("Adding field: " + currentCount);
-    var customFields = $('#customFields');
-    var html = '<div class="form-group row customField">';
-    html += '<div class="col-md-2"><input class="form-control" name="field_' + currentCount  + '_label" type="text" /></div>';
-    html += '<div class="col-md-10"><input class="form-control"  name="field_' + currentCount  + '_ref" type="text" /></div></div>';
-    customFields.append(html);
-};
-
-var bindThumbnailEvent = function(){
-    var thumbnails = $('.mix img');
-    var details = $('#details');
-    var fullscreen = $('#full-size');
-    thumbnails.click(function(){
-        _this = this;
-        var img = new Image();
-        var src = $(_this).data('bg').slice(0, -5) + "10.jpg";
-
-        $('<img src="'+ src +'">').load(function() {
-            var _imgsrc = this;
-            fullscreen
-                .fadeIn(200, function() {
-                    fullscreen.html(_imgsrc);
-                    fullscreen.click(function(){
-                        closeFullSize();
-                    })
-                });
-
-        });
-    });
-};
-
-var closeFullSize = function(){
-    var fullscreen = $('#full-size');
-    fullscreen
-        .fadeOut(200, function() {
-            fullscreen.html("");
-            fullscreen.unbind('click');
-        });
 };
 

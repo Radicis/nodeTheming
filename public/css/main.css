@@ -8,6 +8,7 @@ html, body {
     background-color:#222;
     overflow:auto;
     color: #aaa;
+    overflow-x: hidden;
 }
 
 a{
@@ -15,15 +16,31 @@ a{
     color:#2A5DB0;
 }
 
-.sub-heading{
-    position:relative;
-    top:-20px;
-    color:#666;
+
+.fixed{
+    position:fixed;
+    padding:10px;
+    z-index:9999;
+    background:#222;
+    top:2%;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 2px solid #fefefe;
 }
 
-.content{
-    height:100vh;
+.fixed div{
+
 }
+
+#controls{
+    transition:all, 0.5s ease-out;
+    -webkit-transition:all, 0.5s ease-out;
+}
+
 
 #load-more{
     margin-top:20px;
@@ -31,33 +48,7 @@ a{
     text-align: center;
 }
 
-
-.credit-line {
-    text-align: center;
-    color: #555;
-}
-
-#menu, #details{
-    transition: all 0.8s;
-}
-.left-closed{
-    margin-left:-2000px;
-}
-.right-closed{
-    margin-right:-2000px;
-}
-
-#open-details{
-    position:fixed;
-    bottom:50px;
-    right:50px;
-}
-
-.hovernails{
-    margin-left:-30px;
-}
-
-.hovernails, #collage {
+#collage {
     line-height: 0;
     -webkit-column-count: 9;
     -webkit-column-gap:   0;
@@ -66,6 +57,7 @@ a{
     column-count:         9;
     column-gap:           0;
     overflow:visible;
+    margin-left:-30px;
 }
 
 img{
@@ -96,65 +88,16 @@ img{
     padding-top: 56.25%;
 }
 
-.hovernails img, #collage img {
+#collage img {
     max-width:100px;
     border:0 solid transparent;
     background: transparent;
     z-index:99;
 }
 
-.hovernails img:hover, #collage img:hover{
+#collage img:hover{
     transform: scale(1.5);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-#full-size{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background-color:rgba(20,20,20,0.7);
-    z-index:9999;
-    display:none;
-    text-align: center;
-}
-
-#full-size img{
-    max-width:100vw;
-    max-height:100vh;
-}
-
-
-
-/* ==========================================================================
-   Footer
-   ========================================================================== */
-
-.footer p{
-    text-align:center;
-    color:#222;
-    font-size:0.8em;
-}
-
-.footer p a{
-    color:#222;
-}
-
-footer p a:hover{
-    color:#666;
-}
-
-.footer{
-    margin-top:60px;
-}
-
-.copyright{
-    text-align:center;
-}
-
-.thumbnails{
-    border-right:2px solid #fefefe;
 }
 
 /* ==========================================================================
@@ -165,23 +108,3 @@ footer p a:hover{
     transition:all 0.2s
 }
 
-/* ==========================================================================
-   Helpers
-   ========================================================================== */
-
-.hidden {
-    display: none !important;
-    visibility: hidden;
-}
-
-.clearfix:after {
-    clear: both;
-}
-
-.left{
-    float:left;
-}
-
-.right{
-    float:right;
-}
