@@ -6,11 +6,13 @@ var extJs = function(itemCount, displayMetaDataOnLightBox) {
     $(document).ready(function () {
 
         $(window).scroll(function () {
-            if ($(window).scrollTop() > 100) {
+            if ($(window).scrollTop() > 131) {
                 $('#controls').addClass('fixed');
+                $('#collage').addClass('margin-top');
             }
-            if ($(window).scrollTop() < 105 && $('#controls').hasClass('fixed')) {
+            if ($(window).scrollTop() < 130 && $('#controls').hasClass('fixed')) {
                 $('#controls').removeClass('fixed');
+                $('#collage').removeClass('margin-top');
             }
         });
 
@@ -108,13 +110,13 @@ var extJs = function(itemCount, displayMetaDataOnLightBox) {
 
             var loadMore = $('#load-more');
 
-            // If there are no objects returned then remove the more button
-            if (data.length == 0) {
-                loadMore.fadeOut();
-            }
 
             if ($('#collage > a').length == 0) {
                 collage.html("<div>Nothing found</div>")
+                loadMore.fadeOut();
+            }
+            // If there are no objects returned then remove the more button
+            else if (data.length == 0) {
                 loadMore.fadeOut();
             }
             else {

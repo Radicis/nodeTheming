@@ -34,7 +34,7 @@ router.get('/random', function(req, res) {
                         title: object[displaySchema.title],
                         thumbnail: object[displaySchema.thumbnail],
                         url: object[displaySchema.url],
-                        date: object[displaySchema.date],
+                        date: object[displaySchema.date]
                     };
 
                     context.title = displaySchema.collectionTitle;
@@ -66,19 +66,32 @@ router.post('/', function(req, res) {
                 var skip = parseInt(req.body.skip);
                 var search = req.body.search;
 
+                // Map the query properties to the ones mapped in the schema
+                var titleProperty = displaySchema.title;
+                var thumbnail = displaySchema.thumbnail;
+                var date = displaySchema.date;
+
                 var collection = db.collection(displaySchema.collectionName);
                 collection.find({
-                    $and: [{thumbnailUrl: {$ne: null}}, {
-                        $or: [{
-                            title: {
-                                "$regex": search,
-                                "$options": "i"
+                    $and: [{[thumbnail]: {$ne: null}}, {
+                        $or: [
+                            {
+                                [titleProperty]: {
+                                    "$regex": search,
+                                    "$options": "i"
+                                }
+                            },
+                            {
+                                [date]: {
+                                    "$regex": search,
+                                    "$options": "i"
+                                }
                             }
-                        }]
+                        ]
                     }]
                 }, {limit: count}).skip(skip).toArray(function (error, dbObjects) {
                     if (err) {
-                        throw err;
+                        res.json(err);
                     }
 
                     try {
