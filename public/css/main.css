@@ -87,7 +87,6 @@ img{
     margin-right:10px;
 }
 
-
 .filter .btn{
     margin-right:10px;
 }
@@ -122,7 +121,7 @@ img{
 
 #collage img:hover{
     transform: scale(1.5);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
 }
 
 /* ==========================================================================
@@ -139,9 +138,9 @@ img{
 
 @media (max-width: 1300px) {
     #collage {
-        -moz-column-count:    11;
-        -webkit-column-count: 11;
-        column-count:         11;
+        -moz-column-count:    12;
+        -webkit-column-count: 12;
+        column-count:         12;
     }
 }
 
