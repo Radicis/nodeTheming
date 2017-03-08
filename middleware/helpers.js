@@ -2,13 +2,12 @@ var Vibrant = require('node-vibrant');
 var q = require('q');
 var config = require('../config/config');
 var DisplaySchema = require('../models/displaySchema');
-var CustomField = require('../models/customField');
 
 module.exports.getKeys = function(obj){
     var keys = [];
     for(var key in obj){
-        console.log(key);
-        keys.push(key);
+        if(key!='url' && key!='thumbnail')
+            keys.push(key);
     }
     return keys;
 };
@@ -21,7 +20,6 @@ module.exports.getFullSizeImage = function(thumbnailUrl){
 };
 
 module.exports.truncate = function(string, value){
-    console.log("got: " + string + " and value: " + value);
     if(string != null && typeof string != "undefined") {
         truncated = string.substring(0, value);
         if(string.length>=value) truncated += "...";
@@ -46,7 +44,6 @@ module.exports.getImageColours = function(url){
             if (swatch) {
                 var hex = swatch.getHex();
                 imageColours.push({hex: hex, key: key});
-                console.log(key + " : " + hex);
             }
         }
 
@@ -94,23 +91,9 @@ module.exports.createDummyData = function(){
         footnote: "creditLine"
     };
 
-    var field1 = {
-        ref: "medium",
-        label: "Medium"
-    };
-
-    var field2 = {
-        ref: "all_artists",
-        label: "Artist"
-    };
-
     DisplaySchema.add(schema, function(err, schema){
-        console.log(schema);
-        DisplaySchema.addCustomField(schema._id, field1, function(err, field){
-            DisplaySchema.addCustomField(schema._id, field2, function(err, field){
-                defer.resolve(field);
-            });
-        });
+        defer.resolve(field);
+
     });
     return defer.promise;
 };

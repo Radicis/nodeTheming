@@ -37,6 +37,11 @@ a{
     -webkit-transition:all, 0.5s ease-out;
 }
 
+.sub-heading{
+    top: -15px;
+    position: relative;
+}
+
 .filter .btn{
     margin-top:-5px;
     float:left;
@@ -50,34 +55,18 @@ a{
 
 #collage {
     line-height: 0;
-    -webkit-column-count: 9;
+    -webkit-column-count: 12;
     -webkit-column-gap:   0;
-    -moz-column-count:    9;
+    -moz-column-count:    12;
     -moz-column-gap:      0;
-    column-count:         9;
+    column-count:         12;
     column-gap:           0;
     overflow:visible;
     margin-left:-30px;
-}
-
-.header{
-    position:fixed;
-    z-index:999999;
-    width:100vw;
-    text-align: center;
-    background-color:rgba(20,20,20,0.7);
-    padding-bottom:20px;
-}
-
-#controls span.sub-heading{
-    position:relative;
-    top:-15px;
-}
-
-.header .form-control{
-    max-width:500px;
-    margin:auto;
-    margin-left:-30px;
+    margin-top:20px;
+    min-height:100px;
+    transition:all, 0.5s ease-out;
+    -webkit-transition:all, 0.5s ease-out;
 }
 
 img{
@@ -90,8 +79,8 @@ img{
     margin-right:10px;
 }
 
-.filter > input{
-
+.filter .btn{
+    margin-right:10px;
 }
 
 .mix,
@@ -133,6 +122,73 @@ img{
 
 .btn {
     transition:all 0.2s
+}
+
+/* ==========================================================================
+   Media Queries styles
+   ========================================================================== */
+
+@media (max-width: 1300px) {
+    #collage {
+        -moz-column-count:    11;
+        -webkit-column-count: 11;
+        column-count:         11;
+    }
+}
+
+@media (max-width: 1000px) {
+    #collage {
+        -moz-column-count:    9;
+        -webkit-column-count: 9;
+        column-count:         9;
+    }
+}
+
+@media (max-width: 900px) {
+    #collage {
+        -moz-column-count:    7;
+        -webkit-column-count: 7;
+        column-count:         7;
+    }
+}
+
+@media (max-width: 700px) {
+    #collage {
+        -moz-column-count:    6;
+        -webkit-column-count: 6;
+        column-count:         6;
+    }
+}
+
+@media (max-width: 650px) {
+    #collage {
+        -moz-column-count:    5;
+        -webkit-column-count: 5;
+        column-count:         5;
+        margin-left:-20px;
+    }
+    .buttons{
+        clear:both;
+    }
+}
+
+@media (max-width: 500px) {
+    #collage {
+        -moz-column-count:    4;
+        -webkit-column-count: 4;
+        column-count:         4;
+    }
+}
+
+@media (max-width: 400px) {
+    #collage {
+        -moz-column-count:    3;
+        -webkit-column-count: 3;
+        column-count:         3;
+    }
+    .buttons .btn{
+        font-size:0.7em;
+    }
 }
 
 /* ==========================================================================
@@ -213,20 +269,6 @@ img{
 .badge-checkboxes .disabled label,
 .badge-checkboxes label.checkbox-inline.disabled {
     cursor:not-allowed
-}
-
-/* The following CSS not required for the badge styled checkboxes: */
-section + section  {
-    margin-top:20px;
-}
-
-label + .checkbox  {
-    margin-top:0;
-}
-
-h2 {
-    font-size:18px;
-    font-weight:bold;
 }
 
 

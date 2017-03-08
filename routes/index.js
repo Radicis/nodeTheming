@@ -10,11 +10,14 @@ router.get('/', function(req, res) {
          if (!error && response.statusCode == 200) {
              var context = {};
 
-             var object = JSON.parse(body);
+             var responseBody = JSON.parse(body);
 
+             var object = responseBody.object;
+
+             // get all relevant keys form the object to display as filters
              context.properties = helpers.getKeys(object);
 
-             console.log(context.properties);
+             context.title = responseBody.title;
 
             res.render('default', context);
          }

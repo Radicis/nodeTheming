@@ -12,20 +12,17 @@ $(document).ready(function(){
         }
     });
 
-    $('#load-more').click(function(){
-        AppendMix();
-    });
+    if ($('#collage').length > 0)
+    {
 
-    CreateMix(0);
-});
+        $('#load-more').click(function(){
+            AppendMix();
+        });
 
-
-$(window).scroll(function() {
-    console.log("Scrolling..");
-    if($(window).scrollTop() == $(document).height() - $(window).height()) {
-        AppendMix();
+        CreateMix(0);
     }
 });
+
 
 //setup before functions
 var typingTimer;                //timer identifier
@@ -45,7 +42,6 @@ $input.on('keydown', function () {
 
 var doneTyping = function(){
     searchString = $('#search').val();
-    console.log("Searching for: " + searchString);
     CreateMix();
 };
 
@@ -73,8 +69,6 @@ var AppendMix = function(){
     };
 
     Populate(params);
-
-
 };
 
 var Populate = function(params){
@@ -91,7 +85,7 @@ var Populate = function(params){
         var container = document.querySelector('[data-ref="container"]');
 
         data.forEach(function(item){
-            var html = '<a class="mix ' + item.color + '" data-ref="item"  data-lightbox="'+ item._id + '"' +
+            var html = '<a class="mix" data-date="' + item.date + '" data-title="' +  item.title + ' - ' +  item.date   + '" data-lightbox="items" data-ref="item" data-lightbox="'+ item._id + '"' +
                 ' href="' +  item.thumbnail.slice(0, -5) + "10.jpg" + '"><img src="' +
                 item.thumbnail + '" data-bg="'+ item.thumbnail +
                 '" data-title="' + item.title + '"/></a>';
@@ -122,4 +116,3 @@ var Populate = function(params){
         }
     });
 };
-

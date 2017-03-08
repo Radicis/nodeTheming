@@ -11,91 +11,108 @@ router.get('/random', function(req, res) {
 
     var context = {};
 
-    DisplaySchema.getByCollectionName(config.collectionName, function(err, displaySchema) {
-        if (err) {
-            throw err;
-        }
+    try {
 
-        var collection = db.collection(displaySchema.collectionName);
-        var count = 30000;
-        var rand = Math.floor(Math.random() * count);
-        collection.find({thumbnail: {$ne: ""}}, {limit:1}).skip(rand).toArray(function(error, objects) {
+        DisplaySchema.getByCollectionName(config.collectionName, function (err, displaySchema) {
             if (err) {
-                throw err;
+                res.json(err);
             }
 
-            var object = objects[0];
+            try {
 
-            context.object = {
-                title: object[displaySchema.title],
-                thumbnail: object[displaySchema.thumbnail],
-                url: object[displaySchema.url],
-                date: object[displaySchema.date],
-                customFields: []
-            };
+                var collection = db.collection(displaySchema.collectionName);
+                var count = 30000;
+                var rand = Math.floor(Math.random() * count);
+                collection.find({thumbnail: {$ne: ""}}, {limit: 1}).skip(rand).toArray(function (error, objects) {
+                    if (err) {
+                        throw err;
+                    }
 
-            displaySchema.customFields.forEach(function (field) {
-                context.object.customFields.push({label: field.label, ref: object[field.ref]});
-            });
+                    var object = objects[0];
 
-            context.object.bg = object[displaySchema['thumbnail']];
+                    context.object = {
+                        title: object[displaySchema.title],
+                        thumbnail: object[displaySchema.thumbnail],
+                        url: object[displaySchema.url],
+                        date: object[displaySchema.date],
+                    };
 
-            res.json(context.object);
+                    context.title = displaySchema.brandTitle;
+
+                    res.json(context);
+                });
+            }
+            catch(err){
+                res.json(err);
+            }
         });
-    });
+    }
+    catch(err){
+        res.json(err);
+    }
 });
 
 router.post('/', function(req, res) {
 
-    DisplaySchema.getByCollectionName(config.collectionName, function(err, displaySchema) {
-        if (err) {
-            throw err;
-        }
-
-        var count= parseInt(req.body.count);
-        var skip = parseInt(req.body.skip);
-        var search = req.body.search;
-
-        console.log("Finding: " + search);
-
-        var collection = db.collection(displaySchema.collectionName);
-        collection.find( { $and: [ { thumbnailUrl: { $ne: null } }, {$or: [{ title: { "$regex": search, "$options": "i" }  }]} ] }, {limit:count}).skip(skip).toArray(function(error, dbObjects) {
+    try {
+        DisplaySchema.getByCollectionName(config.collectionName, function (err, displaySchema) {
             if (err) {
-                throw err;
+                res.json(err);
             }
 
-            try{
-                var objects = [];
+            try {
 
-                dbObjects.forEach(function(dbObject){
+                var count = parseInt(req.body.count);
+                var skip = parseInt(req.body.skip);
+                var search = req.body.search;
 
-                    var object = {
-                        _id: dbObject._id,
-                        title: dbObject[displaySchema.title],
-                        thumbnail: dbObject[displaySchema.thumbnail],
-                        url: dbObject[displaySchema.url],
-                        date: dbObject[displaySchema.date],
-                        customFields: []
-                    };
+                var collection = db.collection(displaySchema.collectionName);
+                collection.find({
+                    $and: [{thumbnailUrl: {$ne: null}}, {
+                        $or: [{
+                            title: {
+                                "$regex": search,
+                                "$options": "i"
+                            }
+                        }]
+                    }]
+                }, {limit: count}).skip(skip).toArray(function (error, dbObjects) {
+                    if (err) {
+                        throw err;
+                    }
 
-                    displaySchema.customFields.forEach(function (field) {
-                        object.customFields.push({label: field.label, ref: dbObject[field.ref]});
-                    });
+                    try {
+                        var objects = [];
 
-                    object.bg = dbObject[displaySchema['thumbnail']];
+                        dbObjects.forEach(function (dbObject) {
 
-                    objects.push(object)
+                            var object = {
+                                _id: dbObject._id,
+                                title: dbObject[displaySchema.title],
+                                thumbnail: dbObject[displaySchema.thumbnail],
+                                url: dbObject[displaySchema.url],
+                                date: dbObject[displaySchema.date]
+                            };
+
+                            objects.push(object)
+
+                        });
+
+                        res.json(objects);
+                    }
+                    catch (err) {
+                        res.json({});
+                    }
                 });
-
-                console.log("Objects is: " + objects.length);
-
-                res.json(objects);
             }
-            catch(err){
-                res.json({});
-            }
+            catch (err){res.json(err)}
         });
-    });
+
+
+    }
+    catch(err){
+        res.json(err);
+    }
 });
 
 

@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var CustomField = require('../models/customField');
 
 var DisplaySchemaSchema = mongoose.Schema({
     schemaName:{
@@ -8,7 +7,7 @@ var DisplaySchemaSchema = mongoose.Schema({
     collectionName: {
         type: String
     },
-    brandTitle: {
+    collectionTitle: {
         type: String
     },
     brandUrl: {
@@ -26,11 +25,6 @@ var DisplaySchemaSchema = mongoose.Schema({
     url: {
         type: String
     },
-    customFields:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'CustomField',
-        required: false
-    }],
     footnote: {
         type: String
     },
@@ -57,7 +51,7 @@ module.exports.getFirst = function(callback){
 
 module.exports.getByCollectionName = function(collectionName, callback){
     console.log("Getting by collection name: " + collectionName);
-    DisplaySchema.findOne({collectionName: collectionName}).populate('customFields').exec(callback);
+    DisplaySchema.findOne({collectionName: collectionName}).exec(callback);
 };
 
 module.exports.add = function(schema, callback){
@@ -70,8 +64,3 @@ module.exports.update = function(schema, callback){
     DisplaySchema.findOneAndUpdate({_id:schema._id}, {title:schema.title, collectionName: schema.collectionName, url: schema.url, thumbnail: schema.thumbnail, fullSize: schema.fullSize, date: schema.date, customFields:schema.customFields}, { new: false }, callback);
 };
 
-module.exports.addCustomField = function(id, field, callback){
-    CustomField.add(field, function(err, field){
-        DisplaySchema.findByIdAndUpdate(id,{$addToSet: {"customFields": field}}, callback);
-    });
-};

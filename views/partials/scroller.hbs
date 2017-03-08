@@ -1,10 +1,10 @@
 <div class="container">
     <div class="col-md-12 text-center">
         <div id="controls">
-                <h1>Tate Gallery</h1>
-                <span class="sub-heading">- Fluffy Search -</span>
+            <h1>{{title}}</h1>
+            <span class="sub-heading">- Dynamic Search -</span>
 
-            <div class="filter">
+            <form class="filter" onsubmit="return false;">
                 <input class="form-control" type="text" id="search" placeholder="Search.." />
                 <div class="form-group badge-checkboxes">
                     {{#each properties}}
@@ -16,8 +16,13 @@
                         </div>
                     {{/each}}
                 </div>
-                <button type="button" class="btn btn-xs" data-sort="random">Randomize</button>
-            </div>
+                <div class="buttons">
+                    <button type="button" class="btn btn-xs" data-sort="random">Randomize</button>
+                    {{#each properties}}
+                        <button type="button" class="btn btn-xs text-capitalize" data-sort="{{this}}:asc">Sort By {{this}}</button>
+                    {{/each}}
+                </div>
+            </form>
         </div>
         <br>
         <div class="container" data-ref="container" id="collage">

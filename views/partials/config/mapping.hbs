@@ -4,10 +4,27 @@
             <input type="hidden" name="_id" value="{{schema._id}}" />
             <div class="form-group row">
                 <div class="col-md-12">
-                    <label>Collection Name:</label>
+                    <label>MongoDb Collection Name:</label>
                     <input class="form-control" name="collectionName" type="text" value="{{schema.collectionName}}" required />
                     <p class="form-text text-muted">
                         The name of the mongoDb collection.
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label>Collection Title:</label>
+                    <input class="form-control" name="collectionTitle" type="text" value="{{schema.collectionTitle}}" required />
+                    <p class="form-text text-muted">
+                        The title for this collection.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <label>Collection Logo URL:</label>
+                    <input class="form-control" name="brandURL" type="text" value="{{schema.brandUrl}}" required />
+                    <p class="form-text text-muted">
+                       The url for the logo for this collection
                     </p>
                 </div>
             </div>
@@ -55,32 +72,6 @@
                 </div>
             </div>
             <hr>
-
-            <div class="form-group row">
-                <div class="col-md-12">
-                    <h4>Custom Fields</h4>
-                    <p class="form-text text-muted">
-                        Free Type fields. Map the label (visible in the view) to the property which contains the value
-                    </p>
-                </div>
-            </div>
-
-            <div id="customFields">
-
-                {{#each schema.customFields}}
-                    <div class="form-group row customField">
-                        <div class="col-md-2"><input class="form-control" name="field_{{@index}}_label" type="text" value="{{this.label}}" /></div>
-                        <div class="col-md-10"><input class="form-control"  name="field_{{@index}}_ref" type="text" value="{{this.ref}}" /></div>
-                    </div>
-                {{/each}}
-
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <button class="btn btn-default" type="button" onclick="addCustomField()">Add Field</button>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="col-md-12">
