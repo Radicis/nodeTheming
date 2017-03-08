@@ -19,6 +19,15 @@ router.get('/', function(req, res) {
 
              context.title = responseBody.title;
 
+             console.log(responseBody);
+
+             // Set up config variables
+             context.displayCollectionTitle = config.displayCollectionTitle;
+             context.displayFilterCheckboxes = config.displayFilterCheckboxes;
+             context.displayFilterButtons = config.displayFilterButtons;
+             context.displayMetaDataOnLightBox = config.displayMetaDataOnLightBox;
+             context.itemCount = config.itemCount;
+
             res.render('default', context);
          }
     });

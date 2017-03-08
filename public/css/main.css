@@ -32,6 +32,10 @@ a{
     opacity: 0.9;
 }
 
+.fixed .buttons{
+    clear:both;
+}
+
 #controls{
     transition:all, 0.5s ease-out;
     -webkit-transition:all, 0.5s ease-out;

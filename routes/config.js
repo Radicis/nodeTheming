@@ -5,7 +5,7 @@ var middleware = require('../middleware/helpers');
 var config = require('../config/config');
 
 router.get('/', function(req, res) {
-    var context = {}
+    var context = {};
     DisplaySchema.getFirst(function(err, schema){
         if(err)
             throw err;
@@ -14,16 +14,17 @@ router.get('/', function(req, res) {
     });
 });
 
-router.post('/',function(req, res){
+router.post('/schema',function(req, res){
 
     var newSchema = {
         collectionName: req.body.collectionName,
+        collectionTitle: req.body.collectionTitle,
+        brandUrl: req.body.brandUrl,
         title: req.body.title,
         url: req.body.url,
         thumbnail: req.body.thumbnail,
         fullSize: req.body.fullSize,
-        date: req.body.date,
-        customFields: []
+        date: req.body.date
     };
 
     // If an ID was passed then update instead of create
@@ -42,7 +43,7 @@ router.post('/',function(req, res){
 });
 
 
-router.get('/:_id', function(req, res){
+router.get('/schema:_id', function(req, res){
     var id = req.params._id;
     var context = {};
     DisplaySchema.getById(id, function(err, schema){

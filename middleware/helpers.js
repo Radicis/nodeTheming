@@ -1,4 +1,3 @@
-var Vibrant = require('node-vibrant');
 var q = require('q');
 var config = require('../config/config');
 var DisplaySchema = require('../models/displaySchema');
@@ -26,53 +25,6 @@ module.exports.truncate = function(string, value){
         return truncated
     }
 };
-
-module.exports.getImageColours = function(url){
-
-    var defer = q.defer();
-
-    var imageColours = [];
-    var colours = {};
-
-    var vibrant, lightMuted, darkMuted, darkVibrant;
-
-    Vibrant.from(url).getPalette(function (err, swatches) {
-        if (err) throw err;
-        for (var key in swatches) {
-            var swatch = swatches[key];
-
-            if (swatch) {
-                var hex = swatch.getHex();
-                imageColours.push({hex: hex, key: key});
-            }
-        }
-
-        for (var i = 0; i < imageColours.length; i++) {
-            if (imageColours[i].key === 'Vibrant') {
-                vibrant = imageColours[i].hex;
-            }
-            if (imageColours[i].key === 'LightMuted') {
-                lightMuted = imageColours[i].hex;
-            }
-            if (imageColours[i].key === 'DarkMuted') {
-                darkMuted = imageColours[i].hex;
-            }
-            if (imageColours[i].key === 'DarkVibrant') {
-                darkVibrant = imageColours[i].hex;
-            }
-        }
-
-        colours.vibrant = vibrant;
-        colours.lightMuted = lightMuted;
-        colours.darkMuted = darkMuted;
-        colours.darkVibrant = darkVibrant;
-
-        defer.resolve(colours);
-    });
-
-    return defer.promise;
-};
-
 
 module.exports.createDummyData = function(){
     var defer = q.defer();

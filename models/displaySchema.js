@@ -61,6 +61,6 @@ module.exports.add = function(schema, callback){
 
 module.exports.update = function(schema, callback){
     console.log("Updating details id: " + schema._id);
-    DisplaySchema.findOneAndUpdate({_id:schema._id}, {title:schema.title, collectionName: schema.collectionName, url: schema.url, thumbnail: schema.thumbnail, fullSize: schema.fullSize, date: schema.date, customFields:schema.customFields}, { new: false }, callback);
+    DisplaySchema.findOneAndUpdate({_id:schema._id}, {title:schema.title, collectionTitle: schema.collectionTitle, brandUrl: schema.brandUrl, collectionName: schema.collectionName, url: schema.url, thumbnail: schema.thumbnail, fullSize: schema.fullSize, date: schema.date, customFields:schema.customFields}, { new: false }, callback);
 };
 

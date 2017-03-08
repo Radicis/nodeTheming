@@ -37,7 +37,7 @@ router.get('/random', function(req, res) {
                         date: object[displaySchema.date],
                     };
 
-                    context.title = displaySchema.brandTitle;
+                    context.title = displaySchema.collectionTitle;
 
                     res.json(context);
                 });
@@ -107,8 +107,6 @@ router.post('/', function(req, res) {
             }
             catch (err){res.json(err)}
         });
-
-
     }
     catch(err){
         res.json(err);
